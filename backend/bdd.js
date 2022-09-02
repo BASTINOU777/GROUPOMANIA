@@ -6,3 +6,4 @@ const connection = mysql.createConnection({
   user: "root",
   database: "test",
 });
+let sql = ''

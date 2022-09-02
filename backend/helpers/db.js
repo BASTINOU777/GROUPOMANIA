@@ -1,4 +1,7 @@
 const { Sequelize } = require("sequelize");
+// On importe le package de cryptage de mot de passe
+//const bcrypt = require("bcrypt");
+// Connexion à la base de données
 const mysql = require("mysql2");
 
 // la DB contiendra toutes mes fonctions
@@ -20,7 +23,7 @@ async function initialize() {
   // création de la connection à mySQL
   await mysql.createConnection(configOptions);
 
-  // connect la DB à l' ORM
+  // connection de la DataBase à l' ORM
   const sequelize = new Sequelize(
     configOptions.database.database,
     configOptions.database.user,
