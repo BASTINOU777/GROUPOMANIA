@@ -1,5 +1,5 @@
 // Connexion à la db
-const db = require("../config/db");
+const db = require("../config/database");
 // Importation du package jsonwebtoken pour créer des tokens et les vérifier
 const jwt = require("jsonwebtoken");
 

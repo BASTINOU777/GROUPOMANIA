@@ -2,6 +2,11 @@
 const http = require("http");
 // importation de l'app
 const app = require("./app");
+// importation de la config de la base de données 
+const db = require("./config/dbConfig.js");
+
+/* Création de l'app Server */
+
 // Renvoie un port valide, qu'il soit fourni sous la forme d'un numéro ou d'une chaîne
 const normalizePort = (val) => {
   const port = parseInt(val, 10);
@@ -15,9 +20,9 @@ const normalizePort = (val) => {
   return false;
 };
 // indiquation à l'app express sur quel port elle tourne
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(process.env.PORT || "3001");
 app.set("port", port);
-// Recherche des différentes erreurs et on les gère de manière appropriées
+// Recherche des différentes erreurs dans express et on les gère de manière appropriées
 const errorHandler = (error) => {
   if (error.syscall !== "listen") {
     throw error;
@@ -49,5 +54,21 @@ server.on("listening", () => {
   const bind = typeof address === "string" ? "pipe " + address : "port " + port;
   console.log("Listening on " + bind);
 });
-// on écoute les requêtes envoyées au serveur
+// on écoute le seveur
 server.listen(port);
+
+// Connection à la base de données 
+db.sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Connected to database");
+  })
+  .catch((err) => {
+    console.log("Error" + err);
+  });
+
+// Synchronisation de la base de données au port API en cours d’exécution
+db.sequelize.sync({ force: false }).then(() => {
+  server.listen(port);
+  console.log("Re-Sync done");
+});

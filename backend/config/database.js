@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 // On importe le package de cryptage de mot de passe
-//const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 // Connexion à la base de données
 const mysql = require("mysql2");
 

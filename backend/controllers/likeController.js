@@ -1,5 +1,5 @@
 // conexion à la DB 
-const db = require("../config/db");
+const db = require("../config/database");
 
 // l'user peut liker ou disliker les posts
 exports.likePost = (req, res, next) => {

@@ -1,10 +1,18 @@
+//importation des modules
 const express = require("express");
 const path = require("path");
+
+//Package cors
 const cors = require("cors");
+
+//Package express
 const app = express();
 
-//  Appel des routes
-const db = require("./models");
+//Cors options
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+};
 
 // importation du routeur pour les posts
 const postRoutes = require("./routes/post-routes");
