@@ -52,7 +52,7 @@ app.use("/api/auth", userRoutes);
 // On enregistre les routes pour les likes
 app.use("/api/like", likesRoutes);
 
-//route qu sécurise les headers
+//route qui sécurise les headers
 app.use(helmet());
 
 module.exports = app;
