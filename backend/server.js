@@ -2,8 +2,8 @@
 const http = require("http");
 // importation de l'app
 const app = require("./app");
-// importation de la config de la base de données 
-const db = require("./config/dbConfig.js");
+
+
 
 /* Création de l'app Server */
 
@@ -57,18 +57,3 @@ server.on("listening", () => {
 // on écoute le seveur
 server.listen(port);
 
-// Connection à la base de données 
-db.sequelize
-  .authenticate()
-  .then(() => {
-    console.log("Connected to database");
-  })
-  .catch((err) => {
-    console.log("Error" + err);
-  });
-
-// Synchronisation de la base de données au port API en cours d’exécution
-db.sequelize.sync({ force: false }).then(() => {
-  server.listen(port);
-  console.log("Re-Sync done");
-});

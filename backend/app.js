@@ -1,11 +1,24 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+//Helmet sécurise les requêtes HTTP
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 require("dotenv").config();
 
-const db = require("./node_modules/sequelize/index");
+// Syncronisation avec la base de données avec sequelize
+const db = require("./models/index");
+db.sequelize.sync({ force: false }).then(() => {
+  console.log("Synchronisé avec la base de données !");
+});
+
+// Créer un token d'identification
+//const jwt = require('jsonwebtoken');
+//routes
+const postRoutes = require("./routes/post-routes");
+const userRoutes = require("./routes/user-routes");
+
+const auth = require("./middleware/tokenAuth");
 
 //Pouvoir effectuer les requètes trans-serveur (host:3000 et host:4200)
 app.use((req, res, next) => {
@@ -32,10 +45,7 @@ app.use(express.urlencoded({ extended: true }));
 //protection contre injections
 app.use(mongoSanitize());
 
-//routes
-const postRoutes = require("./routes/post-routes");
-const userRoutes = require("./routes/user-routes");
-
+// chemin avec l'API
 module.exports = app;
 //route pour accéder aux images du dossier static image
 app.use("/imagesPost", express.static(path.join(__dirname, "imagesPost")));
