@@ -11,7 +11,7 @@ const userCtrl = require("../controllers/userController");
 
 /*---- Les routes CRUD des user-----*/
 
-router.get("/:userName", auth, userCtrl.getOneProfile);
+router.get("/:userName",auth, userCtrl.getOneProfile);
 router.put("/:userName", auth, userCtrl.modifyProfile);
 router.delete("/:userName", auth, userCtrl.deleteProfile);
 

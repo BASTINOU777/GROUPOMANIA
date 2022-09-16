@@ -3,12 +3,13 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const db = require("../models/index");
-const Profile = db.profiles;
+const Profile = db.Users;
 
 exports.getOneProfile = (req, res, next) => {
+  console.log("username:" + req.params.userName);
   Profile.findOne({
-    where: { userName: req.params.userName },
-    include: ["posts"],
+    where: { username: req.params.userName },
+    //include: ["posts"],
   })
     .then((oneProfile) => {
       res.status(200).json(oneProfile);
@@ -23,10 +24,10 @@ exports.getOneProfile = (req, res, next) => {
 exports.modifyProfile = (req, res, next) => {
   Profile.update(
     {
-      userName: req.body.user.userName,
+      username: req.body.user.userName,
       email: req.body.user.email,
     },
-    { where: { userName: req.body.user.lastPseudo } }
+    { where: { username: req.body.user.lastPseudo } }
   )
     .then(() =>
       res.status(200).json({
@@ -38,7 +39,7 @@ exports.modifyProfile = (req, res, next) => {
 };
 
 exports.deleteProfile = (req, res, next) => {
-  Profile.destroy({ where: { userName: req.params.userName } })
+  Profile.destroy({ where: { username: req.params.userName } })
     .then(() => res.status(200).json({ message: `Compte supprimé !` }))
     .catch((error) => res.status(400).json({ error }));
 };
