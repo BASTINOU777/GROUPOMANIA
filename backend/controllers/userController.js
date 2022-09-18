@@ -3,16 +3,16 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const db = require("../models/index");
-const Profile = db.Users;
+const User = db.users;
 
-exports.getOneProfile = (req, res, next) => {
+exports.getOneUser = (req, res, next) => {
   console.log("username:" + req.params.userName);
-  Profile.findOne({
+  User.findOne({
     where: { username: req.params.userName },
-    //include: ["posts"],
+    include: ["posts"],
   })
-    .then((oneProfile) => {
-      res.status(200).json(oneProfile);
+    .then((oneUser) => {
+      res.status(200).json(oneUser);
     })
     .catch((error) => {
       res.status(404).json({
@@ -21,8 +21,8 @@ exports.getOneProfile = (req, res, next) => {
     });
 };
 
-exports.modifyProfile = (req, res, next) => {
-  Profile.update(
+exports.modifyUser = (req, res, next) => {
+  User.update(
     {
       username: req.body.user.userName,
       email: req.body.user.email,
@@ -38,8 +38,8 @@ exports.modifyProfile = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
-exports.deleteProfile = (req, res, next) => {
-  Profile.destroy({ where: { username: req.params.userName } })
+exports.deleteUser = (req, res, next) => {
+  User.destroy({ where: { username: req.params.userName } })
     .then(() => res.status(200).json({ message: `Compte supprimé !` }))
     .catch((error) => res.status(400).json({ error }));
 };

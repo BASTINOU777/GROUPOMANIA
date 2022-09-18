@@ -11,9 +11,9 @@ const userCtrl = require("../controllers/userController");
 
 /*---- Les routes CRUD des user-----*/
 
-router.get("/:userName",auth, userCtrl.getOneProfile);
-router.put("/:userName", auth, userCtrl.modifyProfile);
-router.delete("/:userName", auth, userCtrl.deleteProfile);
+router.get("/:userName", auth, userCtrl.getOneUser);
+router.put("/:userName", auth, userCtrl.modifyUser);
+router.delete("/:userName", auth, userCtrl.deleteUser);
 
 //exportation du module router
 module.exports = router;

@@ -3,7 +3,7 @@ const Post = db.posts;
 
 exports.getAllPosts = (req, res, next) => {
   Post.findAll({
-    include: ["profile", db.comments],
+    include: ["user", db.comments],
     order: [["postId", "DESC"]],
   })
     .then((allPosts) => {
@@ -17,7 +17,7 @@ exports.getAllPosts = (req, res, next) => {
 };
 
 exports.getOnePost = (req, res, next) => {
-  Post.findByPk(req.params.id, { include: ["profile", db.comments] })
+  Post.findByPk(req.params.id, { include: ["user", db.comments] })
     .then((onePost) => {
       res.status(200).json(onePost);
     })
@@ -30,7 +30,7 @@ exports.getOnePost = (req, res, next) => {
 
 exports.createPost = (req, res, next) => {
   const newPost = {
-    profileId: req.body.item.profileId,
+    userId: req.body.item.userId,
     title: req.body.item.title,
     text: req.body.item.text,
   };
