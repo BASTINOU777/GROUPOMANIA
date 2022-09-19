@@ -1,34 +1,25 @@
-import React, { useEffect, useState } from "react";
-import Routes from "./components/routes";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/log-page";
+import Home from "./pages/home";
+import Profil from "./pages/profil";
 import axios from "axios";
+import Moderation from "./pages/admin";
 
-const App = () => {
-  const [uid, setUid] = useState(null);
-  const dispatch = useDispatch();
-
-  //je definie useEffect avec une requéte axios
-  useEffect(() => {
-    const fetchToken = async () => {
-      await axios({
-        method: "get",
-        url: `${process.env.REACT_APP_API_URL}jwtid`,
-        withCredentials: true,
-      })
-        .then((res) => {
-          setUid(res.data);
-        })
-        .catch((ere) => console.log(err));
-    };
-    fetchToken();
-    if (uid) {
-      dispatch(getUser(uid));
-    }
-  }, [uid, dispatch]);
+function App() {
   return (
-    <UidContext.Provider value={uid}>
-      <Routes />
-    </UidContext.Provider>
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/post/:id" element={<Post />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profil" element={<Profil />} />
+          <Route path="/moderation" element={<Moderation />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
-};
+}
 
 export default App;
