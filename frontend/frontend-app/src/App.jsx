@@ -15,9 +15,9 @@ import CreateOnePost from './pages/post/CreateOnePost'
 import CreatePost from './pages/post/CreatPost'
 
 import PageNotFound from "./pages/PageNotfound"
+import getPermissions from "./api/AuthAPI"
 
-
-//configuration de mon app, récupére le token et donne les permissions
+//configuration de mon app, je récupére le token et je donne les permissions
 function App() 
 {
   const token = localStorage.getItem('token');
@@ -27,7 +27,7 @@ function App()
     const token = localStorage.getItem('token');
     if (token)
     {
-      getPermissionsFunction(token)
+      getPermissions(token)
       .then((response) => {
         setPermissions(response);
       })

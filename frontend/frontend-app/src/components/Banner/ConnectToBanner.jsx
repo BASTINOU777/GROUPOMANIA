@@ -1,9 +1,10 @@
 import "../styles/Banner.css";
-import logo from "../assets/icon-left-font-monochrome-white.png";
+import logoDesktop from "../assets/icon-left-font-monochrome-white.png";
 import mobileLogo from ""
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserPlus, faPlug } from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faScroll, faUser, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 
+import { Outlet, Link } from 'react-router-dom'
 
 // fonction pour se connecter
 function ConnectToBanner() {
@@ -20,7 +21,7 @@ function ConnectToBanner() {
             <img src={mobileLogo} alt="logo Groupomania" />
           </span>
           <span className="logoDesktopDisplay">
-            <img src={desktopLogo} alt="logo de groupomania" />
+            <img src={logoDesktop} alt="logo de groupomania" />
           </span>
         </Link>
       </div>
@@ -38,10 +39,10 @@ function ConnectToBanner() {
           <span className="bannerDesktop">Publier</span>
         </Link>
         <Link to={`/profile/${userName}`}>
-          <span className="fontAwesomeSize, bannerMobileDisplay">
+          <span className="fontAwesomeSize, bannerMobile">
             <FontAwesomeIcon icon={faUser} />
           </span>
-          <span className="bannerDesktopDisplay">Profil</span>
+          <span className="bannerDesktop">Profil</span>
         </Link>
         <Link to="/logout">
           <span className="fontAwesomeSize, bannerMobile">

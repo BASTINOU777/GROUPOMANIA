@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { getAllPosts } from '../api/PostsAPI'
+import CustomPost from '../components/post/CustomPost'
 
 
-function Feed({permissions}){
+function Feed({permissions})
   {
     const [posts, setList] = useState([]);
   useEffect(() => {
@@ -14,12 +15,12 @@ function Feed({permissions}){
 
   return (
     <main id="feed">
-      <h1>Les dernières publications sur Groupomania</h1>
+      <h1>Les dernières publications</h1>
       <section>
           {
             posts.map((item) => 
             (
-              <TemplatePost value={item} permissions={permissions} key={`${item.postId}`} />
+              <CustomPost value={item} permissions={permissions} key={`${item.postId}`} />
             ))
           }
       </section>
@@ -27,4 +28,4 @@ function Feed({permissions}){
   )
 }
 
-export default Feed 
+export default Feed

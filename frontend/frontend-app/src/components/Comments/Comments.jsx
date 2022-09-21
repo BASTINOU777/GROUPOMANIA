@@ -2,7 +2,7 @@ import CommentsCss from "./frontend/frontend-app/src/styles/Comments.css"
 import React, { useEffect, useState } from 'react'
 
 
-function CommentsDisplay ()
+function CommentsDisplay()
 {
     const [posts, setList] = useState([]);
   

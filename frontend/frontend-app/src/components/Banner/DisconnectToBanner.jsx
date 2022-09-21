@@ -1,9 +1,10 @@
 import '../../styles/Banner.css'
-import logo from "../assets/icon-left-font-monochrome-white.png";
+import logoDesktop from "../assets/icon-left-font-monochrome-white.png"
 import mobileLogo from ""
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faPlug } from '@fortawesome/free-solid-svg-icons'
 
+import { Outlet, Link } from 'react-router-dom'
 
 function DisconnectToBanner (){
     return (
@@ -11,18 +12,18 @@ function DisconnectToBanner (){
         <header>
         <div>
           <Link to="/">
-            <span className="logoMobileDisplay"><img src={mobileLogo} alt="logo de groupomania"/></span>
-            <span className="logoDesktopDisplay"><img src={desktopLogo} alt="logo de groupomania"/></span>
+            <span className="logoMobile"><img src={mobileLogo} alt="logo de Groupomania"/></span>
+            <span className="logoDesktop"><img src={logoDesktop} alt="logo de Groupomania"/></span>
           </Link>
         </div>
         <nav>
-          <Link to="/signin">
-            <span className="fontAwesomeSize, bannerMobileDisplay"><FontAwesomeIcon icon={faUserPlus} /></span>
-            <span className="bannerDesktopDisplay">S'inscrire</span>
+          <Link to="/signUp">
+            <span className="fontAwesomeSize, bannerMobile"><FontAwesomeIcon icon={faUserPlus} /></span>
+            <span className="bannerDesktop">S'inscrire</span>
           </Link>
           <Link to="/login">
-              <span className="fontAwesomeSize, bannerMobileDisplay"><FontAwesomeIcon icon={faPlug} /></span>
-              <span className="bannerDesktopDisplay">Se connecter</span>
+              <span className="fontAwesomeSize, bannerMobile"><FontAwesomeIcon icon={faPlug} /></span>
+              <span className="bannerDesktop">Se connecter</span>
           </Link>
         </nav>
           <Outlet />

@@ -21,7 +21,7 @@ export async function loginFunction(user) {
     });
 }
 
-export async function signinFunction(user) {
+export async function signUp(user) {
   const userName = user.userName;
   const email = user.email;
   const password = user.password1;
@@ -44,7 +44,7 @@ export async function signinFunction(user) {
     });
 }
 
-export default async function getPermissionsFunction(token) {
+export default async function getPermissions(token) {
   return fetch("http://localhost:3000/api/account/permissions", {
     method: "GET",
     headers: {

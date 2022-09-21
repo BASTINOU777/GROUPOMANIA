@@ -17,7 +17,7 @@ function WriteComment({value, permissions})
     <form id="submitForm" onSubmit={handleSubmit((data) => {
       data.profileId = permissions.profileId;
       data.postId = value.postId;
-      createCommentFunction(data);
+      createComment(data);
       alert("Le commentaire a bien été publié");
       window.location.reload();
       })}>
