@@ -1,8 +1,9 @@
-import CommentsCss from "./frontend/frontend-app/src/styles/Comments.css"
 import React, { useEffect, useState } from 'react'
+import {getAllComments} from "../../api/CommentsAPI"
 
+import TemplateComments from "./TemplateComments.jsx"
 
-function CommentsDisplay()
+function CommentsDisplay({permissions})
 {
     const [posts, setList] = useState([]);
   
@@ -18,7 +19,7 @@ function CommentsDisplay()
         {
           posts.map((item) => 
           (
-            <CommentsCss value={item} permissions={permissions} key={`${item.commentId}`} />
+            <TemplateComments value={item} permissions={permissions} key={`${item.commentId}`} />
           ))
         }
       </article>

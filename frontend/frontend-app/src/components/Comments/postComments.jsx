@@ -1,8 +1,9 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
+import { createComment} from "../../api/CommentsAPI"
 
-
-function WriteComment({value, permissions}) 
+//fonction pour publier un commentaire 
+function PostComment({value, permissions}) 
 {
   const {
     register, 
@@ -13,7 +14,7 @@ function WriteComment({value, permissions})
   console.log(author);
   return (
   <article>
-    <h2>Commenter en tant que {author}</h2>
+    <h2>{author} publie</h2>
     <form id="submitForm" onSubmit={handleSubmit((data) => {
       data.profileId = permissions.profileId;
       data.postId = value.postId;
@@ -36,4 +37,4 @@ function WriteComment({value, permissions})
   )
 }
 
-export default WriteComment
+export default PostComment

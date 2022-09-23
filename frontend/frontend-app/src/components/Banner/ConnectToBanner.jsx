@@ -1,10 +1,11 @@
-import "../styles/Banner.css";
-import logoDesktop from "../assets/icon-left-font-monochrome-white.png";
-import mobileLogo from ""
+import "../../styles/Banner.css"
+import logoDesktop from "../../assets/icon-left-font-monochrome-white.png"
+import mobileLogo from "../../assets/icon-left-font-monochrome-white.png" //mettre icon.svg
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse, faScroll, faUser, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 
 import { Outlet, Link } from 'react-router-dom'
+import { React} from "react";
 
 // fonction pour se connecter
 function ConnectToBanner() {

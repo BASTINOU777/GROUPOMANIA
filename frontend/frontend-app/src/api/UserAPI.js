@@ -1,19 +1,47 @@
-import { deleteCommentFunction } from "../../API/commentAPI";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-
-function DeleteCommentButton({ value }) {
-  function deleteComment(item) {
-    deleteCommentFunction(item.commentId).then(() => {
-      window.location.reload();
+export async function updateProfile(user) {
+  console.log(user);
+  return fetch(`http://localhost:3000/api/profile/${user.lastPseudo}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify({
+      user,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch(function (error) {
+      alert("erreur userAPI , updateProfile : " + error);
     });
-  }
-
-  return (
-    <span className="fontAwesomeSize" onClick={() => deleteComment(value)}>
-      <FontAwesomeIcon icon={faTrash} />
-    </span>
-  );
 }
 
-export default DeleteCommentButton;
+export async function getProfile(user) {
+  return fetch(`http://localhost:3000/api/profile/${user}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch(function (error) {
+      alert("erreur userAPI, getProfile function :" + error);
+    });
+}
+
+export async function deleteProfile(user) {
+  console.log(user);
+  console.log(user.userName);
+  return fetch(`http://localhost:3000/api/profile/${user.userName}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  }).then((data) => data.json());
+}

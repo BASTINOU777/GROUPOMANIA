@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
-import { createPostFunction } from '../API/postsAPI';
+import { createPost } from "../../api/PostsAPI";
 
 function CreatePost({permissions}) 
 {
@@ -17,7 +17,7 @@ function CreatePost({permissions})
         <article>
           <form id="submitForm" onSubmit={handleSubmit((data) => {
             data.profileId = permissions.profileId;
-            createPostFunction(data)
+            createPost(data)
             .then((response) => {
               alert(response.message);
             })
@@ -27,7 +27,7 @@ function CreatePost({permissions})
               <input type="title" {...register("title", 
               { required: "Ce champ est requis" })} 
               placeholder='titre' />
-              <p>{errors.titre?.message}</p>
+              {errors && <p>{errors.titre.message}</p>}
             </div>
             <div >
               <label htmlFor="text">texte: </label><br/>

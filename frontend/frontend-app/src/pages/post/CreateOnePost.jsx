@@ -1,8 +1,8 @@
-import TemplatePost from '../components/Post/TemplatePost'
-import DisplayComments from '../components/Comments/DisplayComments'
+import CustomPost from '../../components/post/CustomPost'
+import Comments from '../../components/Comments/Comments'
 import React, { useEffect, useState } from 'react'
-import { getOnePost } from '../API/postsAPI'
-import WriteComment from '../components/Comments/WriteComment'
+import { getOnePost } from '../../api/PostsAPI'
+import postComments from '../../components/Comments/postComments'
 
 function CreateOnePost({permissions}) 
 {
@@ -31,10 +31,10 @@ function CreateOnePost({permissions})
       }
         <h1>{post.title}</h1>
         <section>
-          <TemplatePost value={post} permissions={permissions} key={`${post.id}`}/>
+          <CustomPost value={post} permissions={permissions} key={`${post.id}`}/>
           <h2>Commentaires</h2>
-          <WriteComment value={post} permissions={permissions}/>
-          <DisplayComments value={post} permissions={permissions} />
+          <postComments value={post} permissions={permissions}/>
+          <Comments value={post} permissions={permissions} />
         </section>
       </>) }
     </main>

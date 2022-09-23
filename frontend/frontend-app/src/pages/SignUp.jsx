@@ -1,5 +1,6 @@
-import { signUpFunction } from '../API/authAPI'
+import { signUp } from "../api/AuthAPI"
 import { useForm } from "react-hook-form";
+import { React} from "react";
 
 function SignUp() 
 {
@@ -19,7 +20,7 @@ function SignUp()
           <form id="submitForm" onSubmit={handleSubmit((data) => {
             if (data.password1 === data.password2) 
             {
-              signUpFunction(data);
+              signUp(data);
               alert("Merci pour votre inscription, vous pouvez maintenant vous connecter !")
             }
             else
@@ -44,14 +45,14 @@ function SignUp()
                 } 
               })} 
               placeholder='name' />
-              <p>{errors.pseudo?.message}</p>
+              <p>{errors}</p>
             </div>
             <div >
               <label htmlFor="email">mail: </label><br/>
               <input type="email" {...register("email", 
               { required: "Ce champ est requis" })} 
               placeholder='aaa@exemple.com' />
-              <p>{errors.email?.message}</p>
+              {errors && <p>{errors.email.message}</p>}
             </div>
             <div >
               <label htmlFor="password1">mot de passe: </label><br/>
@@ -65,7 +66,7 @@ function SignUp()
                 }
               })} 
               placeholder='password' />
-              <p>{errors.password1?.message}</p>
+              {errors && <p>{errors.password1.message}</p>}
             </div>
             <div >
               <label htmlFor="password2">confirmer le mot de passe: </label><br/>
@@ -74,7 +75,7 @@ function SignUp()
                 required: "Ce champ est requis", 
               })} 
               placeholder='password' />
-              <p>{errors.password2?.message}</p>
+              {errors && <p>{errors.password1.message}</p>}
             </div>
             <div >
               <button type="submit" className="button">

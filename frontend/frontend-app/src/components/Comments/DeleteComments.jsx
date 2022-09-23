@@ -1,12 +1,13 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import {React} from 'react';
 
 function DeleteComment({value}){
 
   function deleteComment(item)
   {
-    deleteCommentFunction(item.commentId)
+    deleteComment(item.commentId)
       .then(() => 
       {
         window.location.reload();

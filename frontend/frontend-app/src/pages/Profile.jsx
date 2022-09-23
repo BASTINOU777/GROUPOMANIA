@@ -88,7 +88,7 @@ function Profile({permissions})
                     } 
                   })} 
                   />
-                  <p>{errors.userName?.message}</p>
+                  {errors && <p>{errors.userName.message}</p>}
                 </div>
                 <div >
                   <label htmlFor="email">mail: </label><br/>
@@ -106,7 +106,7 @@ function Profile({permissions})
                     } 
                   })} 
                   />
-                  <p>{errors.email?.message}</p>
+                  {errors && <p>{errors.email.message}</p>}
                 </div>
                 {
                 }

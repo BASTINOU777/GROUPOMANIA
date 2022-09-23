@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, } from "react-router-dom"
+// eslint-disable-next-line
 
 
 import ConnectToBanner from "./components/Banner/ConnectToBanner"
@@ -13,7 +14,7 @@ import Profile from "./pages/Profile"
 
 import CreateOnePost from './pages/post/CreateOnePost'
 import CreatePost from './pages/post/CreatPost'
-
+import Logout from './pages/logOut'
 import PageNotFound from "./pages/PageNotfound"
 import getPermissions from "./api/AuthAPI"
 
@@ -37,30 +38,30 @@ function App()
   if (token) {
     // routes PATH
     return (
-      <Router>
+      <BrowserRouter>
         <ConnectToBanner />
 
         <Routes>
-          <Route exact path="/" element={<Home permissions={permissions}/>} />
-          <Route exact path="/profile/:pseudo" element={<Profile permissions={permissions} />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/createPost" element={<CreatePost permissions={permissions} />} />
-          <Route exact path="/post/:id" element={<CreateOnePost permissions={permissions} />} />
+          <Route  path="/" element={<Home permissions={permissions}/>} />
+          <Route  path="/profile/:pseudo" element={<Profile permissions={permissions} />} />
+          <Route  path="/logout" element={<Logout />} />
+          <Route path="/createPost" element={<CreatePost permissions={permissions} />} />
+          <Route  path="/post/:id" element={<CreateOnePost permissions={permissions} />} />
 
-          <Route exact path="*" element={<PageNotFound />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     );
   }
 
   return (
-    <Router>
+    <BrowserRouter>
       <DisconnectToBanner />
       <Routes>
         <Route path="*" element={<Login />} />
-        <Route path="signin" element={<SignUp />} />
+        <Route path="signUp" element={<SignUp />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   )
 }
 

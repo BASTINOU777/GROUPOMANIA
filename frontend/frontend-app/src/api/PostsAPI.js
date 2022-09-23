@@ -18,7 +18,7 @@ export async function getOnePost(pageId) {
   }).then((data) => data.json());
 }
 
-export async function createPostFunction(item) {
+export async function createPost(item) {
   return fetch("http://localhost:3000/api/post/", {
     method: "POST",
     headers: {
@@ -29,7 +29,7 @@ export async function createPostFunction(item) {
   }).then((data) => data.json());
 }
 
-export async function deletePostFunction(pageId) {
+export async function deletePost(pageId) {
   return fetch("http://localhost:3000/api/post/" + pageId, {
     method: "DELETE",
     headers: {

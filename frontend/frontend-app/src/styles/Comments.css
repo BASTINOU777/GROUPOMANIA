@@ -1,0 +1,49 @@
+.commentTemplate {
+    margin: 0 auto 1em;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.commentTemplate a {
+    text-decoration: solid;
+    color: inherit;
+}
+
+.likesBar {
+    min-width: 40px;
+    border-radius: 12px 0 0 12px;
+    background-color: #dfdfdf;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.commentTemplate .comBody {
+    width: 90%;
+}
+
+.commentTemplate .post {
+    max-height: 300px;
+    overflow: hidden;
+}
+
+.commentTemplate .postHead {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.commentTemplate .postFeet {
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.fontAwesomeSize {
+
+    font-size: 1.5em;
+}

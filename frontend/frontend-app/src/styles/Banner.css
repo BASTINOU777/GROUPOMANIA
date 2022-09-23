@@ -1,0 +1,65 @@
+header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #192946;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+header nav {
+    display: flex;
+    color: #FFCF99;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+header nav a {
+    text-decoration: solid;
+    padding: 0.75em;
+    color: #FFCF99;
+    border-radius: 12px;
+}
+
+header nav :is(a:hover, a:focus) {
+    text-decoration: solid;
+    padding: 0.75em;
+    color: #192946;
+    background: #FFCF99;
+    transition-duration: 300ms;
+}
+
+header img {
+    height: 35px;
+}
+
+header .bannerMobile,
+header .logoMobile {
+    display: none;
+}
+
+@media screen and (max-width:700px) {
+    header {
+        justify-content: space-around;
+    }
+
+    header .bannerDesktop {
+        display: none;
+    }
+
+    header .bannerMobile {
+        display: block;
+    }
+}
+
+@media screen and (max-width:450px) {
+    header .logoDesktop {
+        display: none;
+    }
+
+    header .logoMobile {
+        display: block;
+    }
+}

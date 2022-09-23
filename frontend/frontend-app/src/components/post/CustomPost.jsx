@@ -3,6 +3,7 @@ import "../../styles/Posts.css"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faCircleArrowDown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { Outlet, Link } from 'react-router-dom'
+import { React} from "react";
 
 function CustomPost({ value, permissions }){
   const post = value;
