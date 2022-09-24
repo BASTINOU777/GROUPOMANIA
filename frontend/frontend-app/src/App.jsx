@@ -12,8 +12,8 @@ import Login from "./pages/Login"
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
 
-import CreateOnePost from './pages/post/CreateOnePost'
-import CreatePost from './pages/post/CreatPost'
+import CreateOnePost from './pages/CreateOnePost'
+import CreatePost from './pages/CreatPost'
 import Logout from './pages/logOut'
 import PageNotFound from "./pages/PageNotfound"
 import getPermissions from "./api/AuthAPI"

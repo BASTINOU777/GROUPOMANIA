@@ -1,6 +1,6 @@
 export async function updateProfile(user) {
   console.log(user);
-  return fetch(`http://localhost:3000/api/profile/${user.lastPseudo}`, {
+  return fetch(`http://localhost:3001/api/profile/${user.lastPseudo}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

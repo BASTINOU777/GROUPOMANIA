@@ -1,11 +1,11 @@
-import { signUpFunction } from "../api/AuthAPI"
+import { signUp } from "../api/AuthAPI"
 import { useForm } from "react-hook-form"
 import React from "react";
 
 function SignUp() {
   const submitManager = (data) => {
     if (data.password1 === data.password2) {
-      signUpFunction(data);
+      signUp(data);
       alert(
         "Merci pour votre inscription, vous pouvez maintenant vous connecter !"
       );
@@ -35,7 +35,7 @@ function SignUp() {
     },
     email: {
       required: "Ce champ est requis",
-      pattern: "^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
+      //pattern: "^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
     },
   };
 

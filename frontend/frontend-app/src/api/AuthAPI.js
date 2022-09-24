@@ -1,8 +1,8 @@
-export async function loginFunction(user) {
+export async function login(user) {
   console.log(user);
   const email = user.email;
   const password = user.password;
-  return fetch("http://localhost:3000/api/account/login", {
+  return fetch("http://localhost:3001/api/signup/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -21,11 +21,11 @@ export async function loginFunction(user) {
     });
 }
 
-export async function signUpFunction(user) {
+export async function signUp(user) {
   const userName = user.userName;
   const email = user.email;
   const password = user.password1;
-  return fetch("http://localhost:8080/api/account/signup", {
+  return fetch("http://localhost:3001/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

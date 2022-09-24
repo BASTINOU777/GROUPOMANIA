@@ -1,4 +1,4 @@
-import { loginFunction } from "../api/AuthAPI"
+import { login } from "../api/AuthAPI"
 import { useForm } from "react-hook-form"
 import React from "react";
 
@@ -16,7 +16,7 @@ function Login()
   });
   function submitForm(data)
   {
-    loginFunction(data)
+    login(data)
     .then((response) => 
     {
       if (response.token) 
@@ -65,7 +65,7 @@ function Login()
                   minLength: {
                     value: 8,
                     message:
-                      "Le mot de passe doit contenir 8 caractères ou plus",
+                      "Le mot de passe doit contenir au moins 8 caractères",
                   },
                 })}
                 placeholder="password"

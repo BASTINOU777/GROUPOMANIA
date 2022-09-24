@@ -1,5 +1,5 @@
 export async function getAllPosts() {
-  return fetch("http://localhost:3000/api/post/", {
+  return fetch("http://localhost:3001/api/post/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -9,7 +9,7 @@ export async function getAllPosts() {
 }
 
 export async function getOnePost(pageId) {
-  return fetch("http://localhost:3000/api/post/" + pageId, {
+  return fetch("http://localhost:3001/api/post/" + pageId, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export async function getOnePost(pageId) {
 }
 
 export async function createPost(item) {
-  return fetch("http://localhost:3000/api/post/", {
+  return fetch("http://localhost:3001/api/post/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -30,7 +30,7 @@ export async function createPost(item) {
 }
 
 export async function deletePost(pageId) {
-  return fetch("http://localhost:3000/api/post/" + pageId, {
+  return fetch("http://localhost:3001/api/post/" + pageId, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

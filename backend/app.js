@@ -11,16 +11,17 @@ const db = require("./models/index");
 db.sequelize.sync({ force: false }).then(() => {
   console.log("Synchronisé avec la base de données !");
 });
-
+//PATH
 // Créer un token d'identification
 //const jwt = require('jsonwebtoken');
 //routes
 const postRoutes = require("./routes/post-routes");
 const userRoutes = require("./routes/user-routes");
+const signUpRoutes = require("./routes/signUp-routes");
+const commentsRoutes = require("./routes/comments-routes");
+const likesRoutes = require("./routes/likes-routes");
 
-const auth = require("./middleware/tokenAuth");
-
-//Pouvoir effectuer les requètes trans-serveur (host:3000 et host:4200)
+//Pouvoir effectuer les requètes trans-serveur (host:3000 et host:3002)
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -45,16 +46,31 @@ app.use(express.urlencoded({ extended: true }));
 //protection contre injections
 app.use(mongoSanitize());
 
-// chemin avec l'API
-module.exports = app;
+//limite le nombre de requêtes (attaques DDOS)
+const antiDDOS = rateLimit({
+  windowMs: 5 * 60 * 1000, // 5 minutes
+  max: 300, // limiter à 300 requêtes, soit 1req/s
+});
+app.use(antiDDOS);
+const antiForcageId = rateLimit({
+  windowMs: 15 * 60 * 1000, //15min
+  max: 15, //1req/min
+});
+
+// chemin de l'API
+
 //route pour accéder aux images du dossier static image
-app.use("/imagesPost", express.static(path.join(__dirname, "imagesPost")));
-// route pour accéder aux images du dossier static /imagesUser
-app.use("/imagesUser", express.static(path.join(__dirname, "imagesUser")));
+app.use("/pictures", express.static(path.join(__dirname, "pictures")));
+//route pour l'enregistrement du profile
+app.use("/api/signup", antiForcageId, helmet(), signUpRoutes);
 //route générale pour les posts
-app.use("/api/post", postRoutes);
+app.use("/api/post", helmet(), postRoutes);
 //route générale pour l'authentification des users
-app.use("/api/auth", userRoutes);
+app.use("/api/auth", helmet(), userRoutes);
+//route pour les commentaires des users
+app.use("/api/comment", helmet(), commentsRoutes);
+// On enregistre les routes pour les likes
+app.use("/api/like", likesRoutes);
 
 //route qui sécurise les headers
 app.use(helmet());

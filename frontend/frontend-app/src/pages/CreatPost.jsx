@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
-import { createPost } from "../../api/PostsAPI";
+import { createPost } from "../api/PostsAPI";
 
 function CreatePost({permissions}) 
 {
