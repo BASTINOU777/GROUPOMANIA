@@ -1,6 +1,6 @@
-import { loginFunction } from '../api/AuthAPI'
+import { loginFunction } from "../api/AuthAPI"
 import { useForm } from "react-hook-form"
-import { React} from "react";
+import React from "react";
 
 function Login() 
 {
@@ -53,7 +53,7 @@ function Login()
                 {...register("email", { required: "Ce champ est requis" })}
                 placeholder="aaa@exemple.com"
               />
-              {errors && <p>{errors.email.message}</p>}
+              {errors.email && <p>{errors.email.message}</p>}
             </div>
             <div>
               <label htmlFor="password">mot de passe: </label>
@@ -70,7 +70,7 @@ function Login()
                 })}
                 placeholder="password"
               />
-              <p>{errors && errors.password.message}</p>
+              {errors.password && <p>{errors.password.message}</p>}
             </div>
             <div>
               <button type="submit" className="button">

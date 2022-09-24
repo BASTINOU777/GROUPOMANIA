@@ -21,7 +21,7 @@ export async function loginFunction(user) {
     });
 }
 
-export async function signUp(user) {
+export async function signUpFunction(user) {
   const userName = user.userName;
   const email = user.email;
   const password = user.password1;
