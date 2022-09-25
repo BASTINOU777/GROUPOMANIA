@@ -19,7 +19,7 @@ export async function updateProfile(user) {
 }
 
 export async function getProfile(user) {
-  return fetch(`http://localhost:3000/api/profile/${user}`, {
+  return fetch(`http://localhost:3001/api/profile/${user}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -37,7 +37,7 @@ export async function getProfile(user) {
 export async function deleteProfile(user) {
   console.log(user);
   console.log(user.userName);
-  return fetch(`http://localhost:3000/api/profile/${user.userName}`, {
+  return fetch(`http://localhost:3001/api/profile/${user.userName}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

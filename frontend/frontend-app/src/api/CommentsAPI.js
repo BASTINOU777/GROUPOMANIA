@@ -1,6 +1,6 @@
 // pour tous les commentaires
 export async function getAllComments(postId) {
-  return fetch("http://localhost:3000/api/comment/" + postId, {
+  return fetch("http://localhost:3001/api/comment/" + postId, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -10,7 +10,7 @@ export async function getAllComments(postId) {
 }
 // pour creer un com
 export async function createComment(item) {
-  return fetch("http://localhost:3000/api/comment/", {
+  return fetch("http://localhost:3001/api/comment/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -21,7 +21,7 @@ export async function createComment(item) {
 }
 // pour sup un com
 export async function deleteComment(pageId) {
-  return fetch("http://localhost:3000/api/comment/" + pageId, {
+  return fetch("http://localhost:3001/api/comment/" + pageId, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

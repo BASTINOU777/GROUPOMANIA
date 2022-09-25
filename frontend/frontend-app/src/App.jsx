@@ -18,6 +18,7 @@ import Logout from './pages/logOut'
 import PageNotFound from "./pages/PageNotfound"
 import getPermissions from "./api/AuthAPI"
 
+
 //configuration de mon app, je récupére le token et je donne les permissions
 function App() 
 {

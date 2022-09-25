@@ -25,7 +25,7 @@ export async function signUp(user) {
   const userName = user.userName;
   const email = user.email;
   const password = user.password1;
-  return fetch("http://localhost:3001/", {
+  return fetch("http://localhost:3001/api/signup/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -45,7 +45,7 @@ export async function signUp(user) {
 }
 
 export default async function getPermissions(token) {
-  return fetch("http://localhost:3000/api/account/permissions", {
+  return fetch("http://localhost:3001/api/signup/permissions", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

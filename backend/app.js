@@ -46,23 +46,12 @@ app.use(express.urlencoded({ extended: true }));
 //protection contre injections
 app.use(mongoSanitize());
 
-//limite le nombre de requêtes (attaques DDOS)
-const antiDDOS = rateLimit({
-  windowMs: 5 * 60 * 1000, // 5 minutes
-  max: 300, // limiter à 300 requêtes, soit 1req/s
-});
-app.use(antiDDOS);
-const antiForcageId = rateLimit({
-  windowMs: 15 * 60 * 1000, //15min
-  max: 15, //1req/min
-});
-
 // chemin de l'API
 
 //route pour accéder aux images du dossier static image
 app.use("/pictures", express.static(path.join(__dirname, "pictures")));
 //route pour l'enregistrement du profile
-app.use("/api/signup", antiForcageId, helmet(), signUpRoutes);
+app.use("/api/signup", helmet(), signUpRoutes);
 //route générale pour les posts
 app.use("/api/post", helmet(), postRoutes);
 //route générale pour l'authentification des users

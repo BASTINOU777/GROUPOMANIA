@@ -1,15 +1,18 @@
-// importation des modules
+// On importe express
 const express = require("express");
-const router = require("express").Router();
+
+// On créé un routeur avec express
+const router = express.Router();
+
+// On importe le middleware d'authentification pour les users
 const auth = require("../middleware/tokenAuth");
-const likesCtrl = require("../controllers/likeController");
 
-/*----- CRUD pour un Post ----------*/
+// On importe le controller pour les likes
+const postCtrl = require("../controllers/likeController");
 
-//Valisation des tokens pour ajouter à toutes les routes
-router.get("/", auth, likesCtrl.usersLiked);
-router.get("/:id", auth, likesCtrl.likePost);
-router.post("/", auth, likesCtrl.usersLiked);
-router.delete("/:id", auth, likesCtrl.deleteLike);
+router.get("/:id", auth, postCtrl.getLike);
+router.post("/", auth, postCtrl.like);
+router.delete("/:id", auth, postCtrl.deleteLike);
 
+// On exporte le routeur
 module.exports = router;
