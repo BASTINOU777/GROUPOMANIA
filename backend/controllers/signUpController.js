@@ -3,31 +3,34 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const db = require("../models");
-const User = db.users;
+const User = db.User;
 const Op = db.Sequelize.Op;
 
 exports.signUp = (req, res, next) => {
-  if (req.body.password.length < 8 || req.body.password.length > 30) {
+  const password = req.body.password;
+  if (password.length < 8 || password.length > 30) {
     return res.status(400).json({
       message: "Votre mot de passe doit contenir de 8 à 30 caractères",
     });
   }
-  bcrypt
-    .hash(req.body.password, 10)
-    .then((hash) => {
-      const user = {
-        admin: 0,
-        userName: req.body.userName,
-        email: req.body.email,
-        password: hash,
-      };
-      User.create(user)
-        .then((data) =>
-          res.status(201).json({ message: "Utilisateur créé !", data })
-        )
-        .catch((error) => res.status(400).json({ error }));
-    })
-    .catch((error) => res.status(500).json({ error }));
+
+  bcrypt.hash(password, 10).then((hash) => {
+    const user = {
+      admin: 0,
+      username: req.body.userName,
+      email: req.body.email,
+      password: hash,
+      isAdmin: 0,
+    };
+    User.create(user)
+      .then((data) =>
+        res.status(201).json({ message: "Utilisateur créé !", data })
+      )
+      .catch((error) => res.status(400).json({ error }));
+  });
+  // .catch((error) =>
+  //   res.status(500).json({  })
+  // );
 };
 
 exports.login = (req, res, next) => {
@@ -68,7 +71,7 @@ exports.login = (req, res, next) => {
         .catch((error) =>
           res
             .status(500)
-            .json("erreur1 depuis routesController.js :" + { error })
+            .json("erreur1 depuis routesController.js :" + error.message)
         );
     })
     .catch((error) =>

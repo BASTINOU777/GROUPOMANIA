@@ -1,5 +1,5 @@
 export async function login(user) {
-  console.log(user);
+  //console.log(user);
   const email = user.email;
   const password = user.password;
   return fetch("http://localhost:3001/api/signup/login", {
@@ -22,12 +22,14 @@ export async function login(user) {
 }
 
 export async function signUp(user) {
+  alert("ok ");
   const userName = user.userName;
   const email = user.email;
   const password = user.password1;
   return fetch("http://localhost:3001/api/signup/signup", {
     method: "POST",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -40,7 +42,7 @@ export async function signUp(user) {
       return response.json();
     })
     .catch(function (error) {
-      alert("erreur depuis accountAPI.js" + error);
+      alert("erreur depuis AuthAPI.js" + error);
     });
 }
 

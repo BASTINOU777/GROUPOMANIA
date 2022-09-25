@@ -39,7 +39,7 @@ function ConnectToBanner() {
           </span>
           <span className="bannerDesktop">Publier</span>
         </Link>
-        <Link to={`/profile/${userName}`}>
+        <Link to={`/signup/${userName}`}>
           <span className="fontAwesomeSize, bannerMobile">
             <FontAwesomeIcon icon={faUser} />
           </span>
@@ -55,6 +55,7 @@ function ConnectToBanner() {
       <Outlet />
     </header>
   );
+  
 }
 
 export default ConnectToBanner;

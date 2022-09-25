@@ -23,8 +23,10 @@ function Login()
       {
         localStorage.setItem('token', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
-        window.location.reload();
-        window.location.replace("/");
+        // window.location.reload();
+        // window.location.replace("/");
+        console.log(response.token)
+        console.log(response.user)
       }
       else
       {

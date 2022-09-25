@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hook-form";
-import { getProfile, updateProfile, deleteProfile } from '../api/UserAPI'
+import { getProfile, updateProfile, deleteProfile } from "../api/UserAPI"
 
 function Profile({permissions}) 
 {

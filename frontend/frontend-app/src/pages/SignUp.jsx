@@ -2,9 +2,13 @@ import { signUp } from "../api/AuthAPI"
 import { useForm } from "react-hook-form"
 import React from "react";
 
+
 function SignUp() {
   const submitManager = (data) => {
+    console.log(data);
+    //si les deux mots sont identiques
     if (data.password1 === data.password2) {
+      
       signUp(data);
       alert(
         "Merci pour votre inscription, vous pouvez maintenant vous connecter !"
@@ -13,7 +17,24 @@ function SignUp() {
       alert("les mots de passe doivent être identiques");
     }
   };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
+
+  function handleCustom(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+   let formObject = Object.fromEntries(formData.entries());
+    console.log(event);
+    console.log(formData);
+    console.log (formObject); 
+    submitManager(formObject);
+    handleSubmit(formObject);
+  }
+  
   const schema = {
     userName: {
       required: "Ce champ est requis",
@@ -39,11 +60,7 @@ function SignUp() {
     },
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  
 
   return (
     <main>
@@ -51,7 +68,8 @@ function SignUp() {
       <section>
         <article>
           <h2>Connectez-vous pour partager avec les autres membres</h2>
-          <form id="submitForm" onSubmit={() => handleSubmit(submitManager)}>
+
+          <form id="form" onSubmit={handleCustom}>        
             <div>
               <label htmlFor="userName">pseudo: </label>
               <br />
@@ -60,7 +78,7 @@ function SignUp() {
                 {...register("userName", schema.userName)}
                 placeholder="name"
               />
-              {/* <p>{errors}</p> */}
+              
             </div>
             <div>
               <label htmlFor="email">mail: </label>
