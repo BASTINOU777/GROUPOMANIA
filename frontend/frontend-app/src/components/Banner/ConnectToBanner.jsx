@@ -1,27 +1,26 @@
 import "../../styles/Banner.css"
+import { Outlet, Link } from 'react-router-dom'
+import React from "react"
 import logoDesktop from "../../assets/icon-left-font-monochrome-white.png"
-import mobileLogo from "../../assets/icon-left-font-monochrome-white.png" //mettre icon.svg
+import mobileLogo from "/Users/bastienaviles/Documents/openclassrooms/projet7/Groupomania/frontend/frontend-app/src/assets/icon-left-font-monochrome-white.svg" //mettre icon.svg
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse, faScroll, faUser, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 
-import { Outlet, Link } from 'react-router-dom'
-import { React} from "react";
 
 // fonction pour se connecter
 function ConnectToBanner() {
   let profile = JSON.parse(localStorage.getItem("user"));
   let userName = profile.username;
-  //console.log(userName)
-
+  console.log(userName);
+ 
   return (
-    //ajout des composants 
     <header>
       <div>
         <Link to="/">
           <span className="logoMobile">
             <img src={mobileLogo} alt="logo Groupomania" />
           </span>
-          <span className="logoDesktopDisplay">
+          <span className="logoDesktop">
             <img src={logoDesktop} alt="logo de groupomania" />
           </span>
         </Link>
@@ -54,7 +53,7 @@ function ConnectToBanner() {
       </nav>
       <Outlet />
     </header>
-  );
+  )
   
 }
 

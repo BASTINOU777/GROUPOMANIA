@@ -1,6 +1,6 @@
 import "../../styles/Banner.css"
 import { Outlet, Link } from 'react-router-dom'
-import React from "react"
+import React from "react";
 import LogoDesktop from "../../assets/icon-left-font-monochrome-white.svg"
 import MobileLogo from "../../assets/icon-left-font-monochrome-white.svg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
