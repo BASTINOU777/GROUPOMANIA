@@ -5,7 +5,7 @@ require("dotenv").config();
 const db = require("../models");
 const User = db.User;
 const Op = db.Sequelize.Op;
-
+// Middleware pour l'enregistrement de nouvels utilisateurs
 exports.signUp = (req, res, next) => {
   const password = req.body.password;
   if (password.length < 8 || password.length > 30) {
@@ -17,11 +17,14 @@ exports.signUp = (req, res, next) => {
   bcrypt.hash(password, 10).then((hash) => {
     const user = {
       admin: 0,
+      id: req.body.id,
       username: req.body.userName,
       email: req.body.email,
       password: hash,
       isAdmin: 0,
     };
+    console.log(user);
+
     User.create(user)
       .then((data) =>
         res.status(201).json({ message: "Utilisateur créé !", data })
@@ -34,57 +37,45 @@ exports.signUp = (req, res, next) => {
       );
   });
 };
-
+// Middleware pour connecter des utilisateurs existants
 exports.login = (req, res, next) => {
-  User.findOne({ where: { email: req.body.email } })
-    .then((myUser) => {
-      if (!myUser) {
-        return res
-          .status(401)
-          .json({ message: "Mauvaise adresse mail ou mot de passe" });
-      }
-
-      bcrypt
-        .compare(req.body.password, myUser.password)
-        .then((valid) => {
-          if (!valid) {
-            return res
-              .status(401)
-              .json({ message: `Mauvais mot de passe ou d'adresse mail` });
-          }
+  console.log(req.body);
+  User.findOne({ where: { email: req.body.email } }).then((user) => {
+    bcrypt
+      //on le compare à celui dans le body
+      .compare(req.body.password, user.password)
+      .then((valid) => {
+        // Si l'utilisateur entre le mauvais mot de passe retourne une erreur
+        if (!valid) {
+          return res.status(401).json({ error: "Mot de passe incorrect" });
+        } else {
+          // si good je lui renvoie le bon user
+          console.log(user.username);
           res.status(200).json({
-            message: "Utilisateur connecté !",
-            user: {
-              userName: myUser.userName,
-              email: myUser.email,
-            },
-
+            userId: user.id,
+            userName: user.username,
+            email: user.email,
+            // On encode le userId pour que seul l'utilisateur qui a publié un post puisse la modifier ou supprimer
             token: jwt.sign(
-              {
-                userId: myUser.id,
-                admin: myUser.isAdmin,
-              },
+              { userId: user.id },
               process.env.ACCESS_TOKEN_SECRET,
-              { expiresIn: "3600s" }
+              {
+                expiresIn: "24h",
+              }
             ),
           });
-        })
-        //tests pour le front
-        .catch((error) =>
-          res
-            .status(500)
-            .json("erreur1 depuis routesController.js :" + error.message)
-        );
-    })
-    .catch((error) =>
-      res.status(500).json("erreur2 depuis routesController.js :" + { error })
-    );
+        }
+      })
+      .catch((error) =>
+        res.status(500).json({ error: "erreur de service Login" })
+      );
+  });
 };
 
 exports.checkPermissions = (req, res, next) => {
   res.status(200).json({
     message: "Permission en cous de vérification",
     userId: res.locals.userId,
-    admin: res.locals.admin,
+    admin: res.locals.isAdmin,
   });
 };

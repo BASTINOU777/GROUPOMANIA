@@ -9,8 +9,7 @@ import { faHouse, faScroll, faUser, faCircleXmark } from '@fortawesome/free-soli
 
 // fonction pour se connecter
 function ConnectToBanner() {
-  let profile = JSON.parse(localStorage.getItem("user"));
-  let userName = profile.username;
+  let userName = localStorage.getItem("userName");
   console.log(userName);
  
   return (

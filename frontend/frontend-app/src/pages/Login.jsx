@@ -22,11 +22,12 @@ function Login()
       if (response.token) 
       {
         localStorage.setItem('token', response.token);
-        localStorage.setItem('user', JSON.stringify(response.user));
-        window.location.reload();
+        localStorage.setItem('userId', response.userId);
+        localStorage.setItem('userName', response.userName);
+        localStorage.setItem('email', response.email);
+        
         window.location.replace("/");
-        console.log(response.token)
-        console.log(response.user)
+        console.log(response.userInfos)
       }
       else
       {

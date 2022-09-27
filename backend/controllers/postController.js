@@ -2,10 +2,8 @@ const db = require("../models/index");
 const Post = db.Post;
 
 exports.getAllPosts = (req, res, next) => {
-  Post.findAll({
-    include: ["user", db.comments],
-    order: [["postId", "DESC"]],
-  })
+  console.log("test");
+  Post.findAll()
     .then((allPosts) => {
       res.status(200).json(allPosts);
     })
