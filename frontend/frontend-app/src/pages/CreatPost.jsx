@@ -16,7 +16,7 @@ function CreatePost({permissions})
       <section>
         <article>
           <form id="submitForm" onSubmit={handleSubmit((data) => {
-            data.profileId = permissions.profileId;
+            data.userId = permissions.userId;
             createPost(data)
             .then((response) => {
               alert(response.message);
@@ -27,7 +27,8 @@ function CreatePost({permissions})
               <input type="title" {...register("title", 
               { required: "Ce champ est requis" })} 
               placeholder='titre' />
-              {errors && <p>{errors.titre.message}</p>}
+              {errors.titre && <p>{errors.titre.message}</p>}
+              
             </div>
             <div >
               <label htmlFor="text">texte: </label><br/>

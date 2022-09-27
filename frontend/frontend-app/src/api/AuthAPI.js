@@ -1,5 +1,5 @@
 export async function login(user) {
-  //console.log(user);
+  console.log(user);
   const email = user.email;
   const password = user.password;
   return fetch("http://localhost:3001/api/signup/login", {

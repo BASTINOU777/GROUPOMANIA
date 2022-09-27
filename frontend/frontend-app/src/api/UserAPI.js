@@ -1,5 +1,4 @@
 export async function updateProfile(user) {
-  console.log(user);
   return fetch(`http://localhost:3001/api/profile/${user.lastPseudo}`, {
     method: "PUT",
     headers: {

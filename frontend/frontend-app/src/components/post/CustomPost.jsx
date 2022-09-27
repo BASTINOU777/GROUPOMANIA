@@ -40,7 +40,7 @@ return(
             il y a {(timeToCreation)}
           </p>
           {
-            (post.profileId === permissions.profileId || permissions.admin === 1) && <DeletePost value={post}/>
+            (post.userId === permissions.userId || permissions.admin === 1) && <DeletePost value={post}/>
           }
           
         </div>

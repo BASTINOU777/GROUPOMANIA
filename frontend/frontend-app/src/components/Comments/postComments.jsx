@@ -16,7 +16,7 @@ function PostComment({value, permissions})
   <article>
     <h2>{author} publie</h2>
     <form id="submitForm" onSubmit={handleSubmit((data) => {
-      data.profileId = permissions.profileId;
+      data.userId = permissions.userId;
       data.postId = value.postId;
       createComment(data);
       alert("Le commentaire a bien été publié");

@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const rateLimit = require("express-rate-limit");
 //Helmet sécurise les requêtes HTTP
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
@@ -13,7 +14,7 @@ db.sequelize.sync({ force: false }).then(() => {
 });
 //PATH
 // Créer un token d'identification
-//const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 //routes
 const postRoutes = require("./routes/post-routes");
 const userRoutes = require("./routes/user-routes");
@@ -21,7 +22,6 @@ const signUpRoutes = require("./routes/signUp-routes");
 const commentsRoutes = require("./routes/comments-routes");
 const likesRoutes = require("./routes/likes-routes");
 
-//Pouvoir effectuer les requètes trans-serveur (host:3000 et host:3002)
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(

@@ -1,5 +1,5 @@
 const db = require("../models/index");
-const Post = db.posts;
+const Post = db.Post;
 
 exports.getAllPosts = (req, res, next) => {
   Post.findAll({

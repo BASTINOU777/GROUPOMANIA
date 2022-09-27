@@ -26,11 +26,13 @@ exports.signUp = (req, res, next) => {
       .then((data) =>
         res.status(201).json({ message: "Utilisateur créé !", data })
       )
-      .catch((error) => res.status(400).json({ error }));
+      .catch((error) =>
+        res.status(400).json({
+          message: "Utilisateur non créé erreur de controller signup!",
+          error,
+        })
+      );
   });
-  // .catch((error) =>
-  //   res.status(500).json({  })
-  // );
 };
 
 exports.login = (req, res, next) => {
@@ -59,8 +61,8 @@ exports.login = (req, res, next) => {
 
             token: jwt.sign(
               {
-                userId: myUser.profileId,
-                admin: myUser.admin,
+                userId: myUser.id,
+                admin: myUser.isAdmin,
               },
               process.env.ACCESS_TOKEN_SECRET,
               { expiresIn: "3600s" }
@@ -82,7 +84,7 @@ exports.login = (req, res, next) => {
 exports.checkPermissions = (req, res, next) => {
   res.status(200).json({
     message: "Permission en cous de vérification",
-    profileId: res.locals.userId,
+    userId: res.locals.userId,
     admin: res.locals.admin,
   });
 };

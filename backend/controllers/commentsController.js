@@ -4,7 +4,7 @@ const Comment = db.comments;
 exports.getAllComments = (req, res, next) => {
   Comment.findAll({
     where: { postId: req.params.postId },
-    include: ["profile"],
+    include: ["userId"],
     order: [["commentId", "DESC"]],
   })
     .then((allComments) => {
@@ -19,7 +19,7 @@ exports.getAllComments = (req, res, next) => {
 
 exports.createComment = (req, res, next) => {
   const newComment = {
-    profileId: req.body.item.profileId,
+    userId: req.body.item.userId,
     postId: req.body.item.postId,
     text: req.body.item.text,
   };

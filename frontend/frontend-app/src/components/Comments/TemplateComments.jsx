@@ -63,7 +63,7 @@ function timeToCreation()
               il y a {timeToCreation()}
             </p>
             {
-              (comment.profileId === permissions.profileId || permissions.admin === 1) && <DeleteComment value={comment} />
+              (comment.userId === permissions.userId || permissions.admin === 1) && <DeleteComment value={comment} />
             }
           </div>
 

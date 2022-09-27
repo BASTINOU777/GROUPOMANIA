@@ -60,7 +60,7 @@ function Profile({permissions})
       }
     });
 
-  if (user.profileId === permissions.profileId || permissions.admin === 1) 
+  if (user.userId === permissions.userId || permissions.admin === 1) 
   {
     return (
       <main>

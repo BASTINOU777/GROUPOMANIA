@@ -2,7 +2,7 @@ import "../../styles/Banner.css"
 import { Outlet, Link } from 'react-router-dom'
 import React from "react"
 import logoDesktop from "../../assets/icon-left-font-monochrome-white.png"
-import mobileLogo from "/Users/bastienaviles/Documents/openclassrooms/projet7/Groupomania/frontend/frontend-app/src/assets/icon-left-font-monochrome-white.svg" //mettre icon.svg
+import mobileLogo from "../../assets/icon-left-font-monochrome-white.png" 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse, faScroll, faUser, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 

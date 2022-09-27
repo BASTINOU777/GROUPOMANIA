@@ -21,12 +21,18 @@ export async function getAllPosts() {
 }
 
 export async function getOnePost(pageId) {
-  return fetch("http://localhost:3001/api/post/" + pageId, {
+  console.log(HEADERS_CONTENT);
+  const response = await fetch("http://localhost:3001/api/post/" + pageId, {
     method: "GET",
     headers: HEADERS_CONTENT,
-  }).then((data) => data.json());
-}
+  });
+  console.log("DEBUG response one post : ", response);
 
+  const jsonResponse = await response.json();
+
+  console.log("DEBUG json response one post: ", jsonResponse);
+  return jsonResponse;
+}
 export async function createPost(item) {
   return fetch("http://localhost:3001/api/post/", {
     method: "POST",
