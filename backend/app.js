@@ -14,7 +14,7 @@ db.sequelize.sync({ force: false }).then(() => {
 });
 //PATH
 // Créer un token d'identification
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 //routes
 const postRoutes = require("./routes/post-routes");
 const userRoutes = require("./routes/user-routes");

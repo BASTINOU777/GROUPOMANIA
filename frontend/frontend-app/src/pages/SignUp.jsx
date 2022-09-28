@@ -10,9 +10,6 @@ function SignUp() {
     if (data.password1 === data.password2) {
       
       signUp(data);
-      alert(
-        "Merci pour votre inscription, vous pouvez maintenant vous connecter !"
-      );
     } else {
       alert("les mots de passe doivent être identiques");
     }
@@ -56,7 +53,7 @@ function SignUp() {
     },
     email: {
       required: "Ce champ est requis",
-      //pattern: "^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
+      // pattern: "^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
     },
   };
 

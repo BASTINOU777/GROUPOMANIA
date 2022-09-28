@@ -3,13 +3,12 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const db = require("../models");
-const User = db.users;
+const User = db.User;
 
 exports.getOneUser = (req, res, next) => {
   console.log("username:" + req.params.userName);
   User.findOne({
     where: { username: req.params.userName },
-    include: ["posts"],
   })
     .then((oneUser) => {
       res.status(200).json(oneUser);
@@ -22,17 +21,19 @@ exports.getOneUser = (req, res, next) => {
 };
 
 exports.modifyUser = (req, res, next) => {
+  console.log(req.params.userName);
+  console.log(req.body.data.newEmail);
   User.update(
     {
-      username: req.body.user.userName,
-      email: req.body.user.email,
+      username: req.body.data.newUsername,
+      email: req.body.data.newEmail,
     },
-    { where: { username: req.body.user.lastPseudo } }
+    { where: { username: req.params.userName } }
   )
-    .then(() =>
+    .then((user) =>
       res.status(200).json({
         message: `Objet modifié !`,
-        ...req.body.user,
+        user,
       })
     )
     .catch((error) => res.status(400).json({ error }));

@@ -26,7 +26,7 @@ function Login()
         localStorage.setItem('userName', response.userName);
         localStorage.setItem('email', response.email);
         
-        window.location.replace("/");
+        window.location.replace(`/profile/${response.userName}`);
         console.log(response.userInfos)
       }
       else

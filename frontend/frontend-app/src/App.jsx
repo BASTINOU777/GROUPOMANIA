@@ -23,7 +23,7 @@ import getPermissions from "./api/AuthAPI"
 function App() 
 {
   const token = localStorage.getItem('token');
-
+let user = localStorage.getItem('userName')
   const [permissions, setPermissions] = useState(0);
   useEffect(() => {
     const token = localStorage.getItem('token');

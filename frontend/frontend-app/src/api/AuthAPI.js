@@ -22,7 +22,6 @@ export async function login(user) {
 }
 
 export async function signUp(user) {
-  alert("ok ");
   const userName = user.userName;
   const email = user.email;
   const password = user.password1;

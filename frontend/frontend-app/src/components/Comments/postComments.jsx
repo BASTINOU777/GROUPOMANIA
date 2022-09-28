@@ -10,7 +10,7 @@ function PostComment({value, permissions})
     handleSubmit, 
   } = useForm();
 
-  const author = JSON.parse(localStorage.getItem('user')).userName;
+  const author = localStorage.getItem('user').userName;
   console.log(author);
   return (
   <article>

@@ -3,7 +3,7 @@ function Logout()
 {
   localStorage.clear();
   window.location.reload();
-  window.location.replace("/");
+  window.location.replace("/signup/");
   
   return (
     <main>

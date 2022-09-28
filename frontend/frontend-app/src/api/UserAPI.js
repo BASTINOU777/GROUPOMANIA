@@ -1,12 +1,12 @@
-export async function updateProfile(user) {
-  return fetch(`http://localhost:3001/api/profile/${user.lastPseudo}`, {
+export async function updateProfile(user, data) {
+  return fetch(`http://localhost:3001/api/auth/${user}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     body: JSON.stringify({
-      user,
+      data,
     }),
   })
     .then((response) => {
@@ -18,7 +18,7 @@ export async function updateProfile(user) {
 }
 
 export async function getProfile(user) {
-  return fetch(`http://localhost:3001/api/profile/${user}`, {
+  return fetch(`http://localhost:3001/api/auth/${user}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
