@@ -1,12 +1,13 @@
 import {deletePost} from '../../api/PostsAPI'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import {React} from 'react';
+import * as React from "react";
+
 
 function DeletePost({value}){
     function deleteComment(item)
     {
-deletePost(item.postId)
+deletePost(item.id)
 .then(()=>{
     window.location.reload();
     window.location.replace(`/`);

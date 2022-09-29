@@ -10,7 +10,7 @@ export async function updateProfile(user, data) {
     }),
   })
     .then((response) => {
-      return response.json();
+      return response;
     })
     .catch(function (error) {
       alert("erreur userAPI , updateProfile : " + error);

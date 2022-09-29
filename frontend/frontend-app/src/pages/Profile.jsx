@@ -1,5 +1,5 @@
 import React, { useEffect , useState } from 'react'
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import { updateProfile, deleteProfile } from "../api/UserAPI"
 
 
@@ -31,7 +31,7 @@ function Profile({permissions})
     updateProfile(user.userName, data)
     .then((response) => 
     {
-      console.log(response.user.email);
+      console.log(response);
       localStorage.setItem('userName', data.newUsername);
       localStorage.setItem('email',data.newEmail);
       alert("Le profil a bien été modifié");

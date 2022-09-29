@@ -33,12 +33,12 @@ export async function getOnePost(pageId) {
   console.log("DEBUG json response one post: ", jsonResponse);
   return jsonResponse;
 }
-export async function createPost(item) {
+export async function createPost(data) {
   return fetch("http://localhost:3001/api/post/", {
     method: "POST",
     headers: HEADERS_CONTENT,
-    body: JSON.stringify({ item }),
-  }).then((data) => data.json());
+    body: JSON.stringify(data),
+  }).then((response) => response.json());
 }
 
 export async function deletePost(pageId) {

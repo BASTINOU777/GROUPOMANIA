@@ -3,21 +3,18 @@ import "../../styles/Posts.css"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faCircleArrowDown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { Outlet, Link } from 'react-router-dom'
-import { React} from "react";
+import * as React from "react";
+
+
 
 function CustomPost({ value, permissions }){
   const post = value;
-
-function timeToCreation()
-{
-  let dateUpdate = new Date (`${post.createdAt}`);
-  //temps en secondes
-  let timeSincePost = (Date.now() - Date.parse(dateUpdate))/1000;
-  if (timeSincePost < 60) 
-  {
-      return `erreur`
-    }
+  let user = {
+    userName: localStorage.getItem("userName"),
+    isAdmin: localStorage.getItem("isAdmin")
   }
+
+
 return(
   <article className='postTemplate' >
       <div className="likesBar">
@@ -36,20 +33,20 @@ return(
       <div className='postBody'>
         <div className="postHead">
           <p>
-            Publié par <Link to={`/profile/${post.profile.userName}`} > <strong>{` ${post.profile.userName} `}</strong> </Link>
-            il y a {(timeToCreation)}
+            Publié par : {post.author + " "} 
+             le {post.createdAt.split("T")[0] + " à " + post.createdAt.split("T")[1].split(".")[0]}
           </p>
           {
-            (post.userId === permissions.userId || permissions.admin === 1) && <DeletePost value={post}/>
+            (post.author === user.userName|| user.isAdmin=== 1) && <DeletePost value={post}/>
           }
           
         </div>
         
-        <Link to={`/post/${post.postId}`} >
+       
           <h2>{post.title}</h2>
-          <div className="post">{post.text}</div>
+          <div className="post">{post.content}</div>
           <p className="postFeet"> {/*{post.commentNumber} Commentaire(s) */} </p>
-        </Link>
+        
       </div>
     <Outlet />
   </article>

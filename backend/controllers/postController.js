@@ -27,16 +27,21 @@ exports.getOnePost = (req, res, next) => {
 };
 
 exports.createPost = (req, res, next) => {
+  console.log(req.body);
   const newPost = {
-    userId: req.body.item.userId,
-    title: req.body.item.title,
-    text: req.body.item.text,
+    author: req.body.author,
+    title: req.body.title,
+    content: req.body.content,
+    attachement: "test",
   };
+  console.log(newPost);
   Post.create(newPost)
-    .then(() =>
-      res.status(201).json({ message: "Nouvelle publication enregistrée !" })
+    .then((data) =>
+      res
+        .status(201)
+        .json({ message: "Nouvelle publication enregistrée !", data })
     )
-    .catch((error) => res.status(400).json({ message: error }));
+    .catch((error) => res.status(400).json(error));
 };
 
 exports.deletePost = (req, res, next) => {

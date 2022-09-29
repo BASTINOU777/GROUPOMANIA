@@ -10,7 +10,7 @@ function Feed({ permissions })
     useEffect(() => {
       getAllPosts()
       .then((response) => {
-        if (response.error) return
+        console.log(response);
         setList(response);
       })
     }, [])

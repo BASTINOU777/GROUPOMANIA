@@ -1,21 +1,11 @@
 module.exports = (sequelize, Sequelize) => {
-  const Post = sequelize.define("Post", {
+  const Com = sequelize.define("Com", {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    attachement: {
-      type: Sequelize.STRING,
-      required: true,
-      allowNull: false,
-    },
     author: {
-      type: Sequelize.STRING,
-      required: true,
-      allowNull: false,
-    },
-    title: {
       type: Sequelize.STRING,
       required: true,
       allowNull: false,
@@ -25,11 +15,7 @@ module.exports = (sequelize, Sequelize) => {
       required: true,
       allowNull: false,
     },
-    likes: {
-      type: Sequelize.INTEGER,
-      defaultValue: 0,
-    },
   });
 
-  return Post;
+  return Com;
 };

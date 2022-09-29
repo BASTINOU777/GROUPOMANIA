@@ -1,50 +1,56 @@
 import React from 'react'
-import { useForm } from "react-hook-form"
-import { createPost } from "../api/PostsAPI";
+// import { useForm } from "react-hook-form";
+import { createPost } from "../api/PostsAPI"
 
-function CreatePost({permissions}) 
+
+function CreatePosts() 
 {
-  const {
-    register, 
-    handleSubmit, 
-    formState: {errors} 
-  } = useForm();
+ 
+  //au clic sur le bouton "modifier profil", fonction de mise à jour du profil et reload de la page
+  function submitForm(event)
+  { 
+    event.preventDefault()
+    let data = {
+      title: event.target.titre.value,
+      content: event.target.content.value,
+      author: localStorage.getItem("userName")
+    }
+    createPost(data)
+    .then((response) => 
+    {
+      console.log(response);
+      alert("Le Post a bien été crée");
+      window.location.replace("/");
+    })
+  }
 
-  return (
-    <main id="feed">
-      <h1>Créer une publication sur Groupomania</h1>
-      <section>
-        <article>
-          <form id="submitForm" onSubmit={handleSubmit((data) => {
-            data.userId = permissions.userId;
-            createPost(data)
-            .then((response) => {
-              alert(response.message);
-            })
-          })}>
-            <div >
-            <label htmlFor="title">titre: </label><br/>
-              <input type="title" {...register("title", 
-              { required: "Ce champ est requis" })} 
-              placeholder='titre' />
-              {errors.titre && <p>{errors.titre.message}</p>}
-              
-            </div>
-            <div >
-              <label htmlFor="text">texte: </label><br/>
-              <textarea type="text" {...register("text")} 
-              placeholder='texte' />
-            </div>
-            <div >
-              <button type="submit" className="button">
-                Publier
-              </button>
-            </div>
-          </form>
-        </article>
-      </section>
-    </main>
-  )
+    return (
+      <main>
+        <h1>Page de creation de Posts Groupomania</h1>
+        <section>
+          <article>
+          <h2>Créer un post</h2>
+            <form id="submitForm" onSubmit={submitForm}>
+              <div>
+                  <label htmlFor="Titre">Titre: </label><br/>
+                  <input type="text" name="titre" placeholder='Titre'/>
+                </div> 
+                <div>
+                  <label htmlFor="Content">Content</label><br/>
+                  <input type="text" name="content" placeholder='Content'/>
+                </div>
+                <div >
+                  <button type="submit" className="button">
+                    Poster
+                  </button>
+                </div>
+                
+              </form>
+          </article>
+        </section>
+      </main>
+    )
 }
 
-export default CreatePost
+
+export default CreatePosts

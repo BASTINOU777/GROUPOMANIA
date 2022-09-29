@@ -1,6 +1,7 @@
 import { signUp } from "../api/AuthAPI"
 import { useForm } from "react-hook-form"
 import React from "react";
+import { Navigate } from 'react-router-dom'
 
 
 function SignUp() {
@@ -9,16 +10,23 @@ function SignUp() {
     //si les deux mots sont identiques
     if (data.password1 === data.password2) {
       
-      signUp(data);
+      signUp(data)
+      .then(()=>{
+        alert("inscription valide");
+        window.location.replace("/login");
+      }
+    )
     } else {
       alert("les mots de passe doivent être identiques");
     }
+
   };
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  
 
 
   function handleCustom(event) {
@@ -30,6 +38,7 @@ function SignUp() {
     console.log (formObject); 
     submitManager(formObject);
     handleSubmit(formObject);
+  
   }
   
   const schema = {
@@ -53,7 +62,7 @@ function SignUp() {
     },
     email: {
       required: "Ce champ est requis",
-      // pattern: "^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
+      //pattern: "^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
     },
   };
 

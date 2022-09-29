@@ -19,11 +19,12 @@ import PageNotFound from "./pages/PageNotfound"
 import getPermissions from "./api/AuthAPI"
 
 
-//configuration de mon app, je récupére le token et je donne les permissions
+//configuration de mon app, je récupére le token et le userName ds le LS
 function App() 
 {
   const token = localStorage.getItem('token');
-let user = localStorage.getItem('userName')
+let user = localStorage.getItem('userName');
+console.log(user);
   const [permissions, setPermissions] = useState(0);
   useEffect(() => {
     const token = localStorage.getItem('token');
