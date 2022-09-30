@@ -1,7 +1,7 @@
 import { signUp } from "../api/AuthAPI"
 import { useForm } from "react-hook-form"
 import React from "react";
-import { Navigate } from 'react-router-dom'
+
 
 
 function SignUp() {

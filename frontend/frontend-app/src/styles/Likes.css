@@ -1,0 +1,20 @@
+.postHead.likeLign {
+    display: flex;
+    align-items: center;
+}
+
+
+.postHead .buttonHeart {
+    height: 35px;
+}
+
+.postHead .buttonHeart:hover {
+    cursor: pointer;
+}
+
+
+.postHead.likeCount {
+    font-size: 14px;
+    padding-left: 10px;
+    margin: 0;
+}

@@ -1,3 +1,4 @@
+const { post } = require("../app");
 const db = require("../models/index");
 const Post = db.Post;
 
@@ -45,7 +46,15 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-  Post.destroy({ where: { postId: req.params.id } })
+  Post.destroy({ where: { id: req.params.id } })
     .then(() => res.status(200).json({ message: "Post deleted !" }))
     .catch((error) => res.status(400).json({ error }));
+};
+exports.likePost = (req, res, next) => {
+  let Like = req.params.like;
+  if (Like == 1) {
+    Post.findByPk(req.params.id)
+  } else if (Like == 0) {
+    Post.findByPk(req.params.id)
+  }
 };

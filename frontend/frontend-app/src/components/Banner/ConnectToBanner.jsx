@@ -29,7 +29,7 @@ function ConnectToBanner() {
           <span className="bannerMobile">
             <FontAwesomeIcon icon={faHouse} />
           </span>
-          <span className="bannerDesktop">Accueil</span>
+          <span className="bannerDesktop">Fils d'actus</span>
         </Link>
         <Link to="/createPost">
           <span className="fontAwesomeSize, bannerMobile">

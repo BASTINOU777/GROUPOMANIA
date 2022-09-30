@@ -54,6 +54,7 @@ exports.login = (req, res, next) => {
           res.status(200).json({
             userId: user.id,
             userName: user.username,
+            isAdmin: user.isAdmin,
             email: user.email,
             // On encode le userId pour que seul l'utilisateur qui a publié un post puisse la modifier ou supprimer
             token: jwt.sign(

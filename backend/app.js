@@ -14,7 +14,7 @@ db.sequelize.sync({ force: false }).then(() => {
 });
 //PATH
 // Créer un token d'identification
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 //routes
 const postRoutes = require("./routes/post-routes");
 const userRoutes = require("./routes/user-routes");
@@ -58,8 +58,6 @@ app.use("/api/post", helmet(), postRoutes);
 app.use("/api/auth", helmet(), userRoutes);
 //route pour les commentaires des users
 app.use("/api/comment", helmet(), commentsRoutes);
-// On enregistre les routes pour les likes
-app.use("/api/like", likesRoutes);
 
 //route qui sécurise les headers
 app.use(helmet());

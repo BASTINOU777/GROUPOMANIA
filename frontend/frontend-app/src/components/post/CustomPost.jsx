@@ -1,8 +1,9 @@
-import DeletePost from "./DeletePost"
+import {deletePost} from '../../api/PostsAPI'
 import "../../styles/Posts.css"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faCircleArrowDown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons'
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import * as React from "react";
 
 
@@ -12,6 +13,14 @@ function CustomPost({ value, permissions }){
   let user = {
     userName: localStorage.getItem("userName"),
     isAdmin: localStorage.getItem("isAdmin")
+  }
+  function DeletePost(item){
+  
+    deletePost(item.id)
+    .then(()=>{
+        window.location.reload();
+        window.location.replace(`/`);
+    })
   }
 
 
@@ -37,7 +46,11 @@ return(
              le {post.createdAt.split("T")[0] + " à " + post.createdAt.split("T")[1].split(".")[0]}
           </p>
           {
-            (post.author === user.userName|| user.isAdmin=== 1) && <DeletePost value={post}/>
+            (post.author === user.userName|| user.isAdmin   == 1) && <span className="fontAwesomeSize" onClick={() =>
+              DeletePost(post)
+            }>
+              <FontAwesomeIcon icon={faTrash} />
+            </span>
           }
           
         </div>

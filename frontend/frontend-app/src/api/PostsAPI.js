@@ -41,8 +41,8 @@ export async function createPost(data) {
   }).then((response) => response.json());
 }
 
-export async function deletePost(pageId) {
-  return fetch("http://localhost:3001/api/post/" + pageId, {
+export async function deletePost(id) {
+  return fetch("http://localhost:3001/api/post/" + id, {
     method: "DELETE",
     headers: HEADERS_CONTENT,
   }).then((data) => data.json());
