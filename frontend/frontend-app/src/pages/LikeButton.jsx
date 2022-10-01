@@ -3,7 +3,24 @@ import { useEffect } from 'react'
 import * as React from "react";
 import heartEmpty from '../assets/heartEmpty.png'
 import heartFull from '../assets/heartFull.png'
-import '../styles/Likes.css'
+import styled from 'styled-components'
+
+const LikeLign = styled.div`
+  display: flex;
+  align-items: center;`
+
+  const ButtonHeart = styled.img`
+  height: 35px;
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+const LikeCount = styled.p`
+  font-size: 14px;
+  padding-left: 10px;
+  margin: 0;
+`
 
 
 
@@ -21,7 +38,7 @@ function LikeButton(post) {
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${login.token}`,
+            Authorization: `Bearer ${userId.token}`,
           },
         })
           .then(function (res) {
@@ -41,9 +58,9 @@ function LikeButton(post) {
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${login.token}`,
+            Authorization: `Bearer ${userId.token}`,
           },
-          body: JSON.stringify({ author }),
+          body: JSON.stringify( userId ),
         })
           .then(function (res) {
             if (res.ok) {
@@ -58,16 +75,16 @@ function LikeButton(post) {
           })
       }
     }
-  }, [changeOnLike]) 
-  let token = JSON.parse(localStorage.getItem('token'))
+  }, [changeOnLike]) // eslint-disable-line react-hooks/exhaustive-deps
+  // let userId = JSON.parse(localStorage.getItem('userId'))
 
   useEffect(() => {
-    let token = JSON.parse(localStorage.getItem('token'))
+    let userId = JSON.parse(localStorage.getItem('userId'))
     fetch(`http://localhost:3000/api/post/${post.id}/`, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${login.token}`,
+        Authorization: `Bearer ${userId.token}`,
       },
     }).then((response) =>
       response
@@ -75,7 +92,7 @@ function LikeButton(post) {
         .then((likesData) => {
           setLikeCount(likesData.length)
           if (likesData.length) {
-            const like = likesData.find((e) => e.userId === login.userId)
+            const like = likesData.find((e) => e.userId === userId)
             if (like) {
               setIsLiked(true)
             }
@@ -143,3 +160,4 @@ function LikeButton(post) {
 }
 
 export default LikeButton
+

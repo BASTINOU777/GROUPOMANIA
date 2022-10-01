@@ -47,3 +47,4 @@ export async function deletePost(id) {
     headers: HEADERS_CONTENT,
   }).then((data) => data.json());
 }
+

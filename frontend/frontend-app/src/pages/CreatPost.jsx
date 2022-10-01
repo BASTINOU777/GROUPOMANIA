@@ -26,19 +26,22 @@ function CreatePosts()
 
     return (
       <main>
-        <h1>Page de creation de Posts Groupomania</h1>
+        <h1>Publier sur Groupomania</h1>
         <section>
           <article>
-          <h2>Créer un post</h2>
+          <h2>Créer une publication</h2>
             <form id="submitForm" onSubmit={submitForm}>
               <div>
                   <label htmlFor="Titre">Titre: </label><br/>
                   <input type="text" name="titre" placeholder='Titre'/>
                 </div> 
                 <div>
-                  <label htmlFor="Content">Content</label><br/>
+                  <label htmlFor="Content">Écrivez votre publication</label><br/>
                   <input type="text" name="content" placeholder='Content'/>
                 </div>
+                <PostImgContainer>
+                <PostImg src={pictures} />{' '}
+                </PostImgContainer>
                 <div >
                   <button type="submit" className="button">
                     Poster

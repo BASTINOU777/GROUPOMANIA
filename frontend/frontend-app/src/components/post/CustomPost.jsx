@@ -2,9 +2,9 @@ import {deletePost} from '../../api/PostsAPI'
 import "../../styles/Posts.css"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import { faCircleArrowDown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { Outlet } from 'react-router-dom'
 import * as React from "react";
+import LikeButton from "../../pages/LikeButton"
 
 
 
@@ -26,29 +26,17 @@ function CustomPost({ value, permissions }){
 
 return(
   <article className='postTemplate' >
-      <div className="likesBar">
-        <span className="fontAwesomeSize" onClick={() =>
-          console.log("on veut mettre un like")
-        }>
-        <FontAwesomeIcon icon={faCircleArrowUp} />
-        </span>
-        <p>{post.likes}</p>
-        <span className="fontAwesomeSize" onClick={() =>
-          console.log("on veut mettre un dislike")
-        }>
-          <FontAwesomeIcon icon={faCircleArrowDown} />
-        </span>
-      </div>
       <div className='postBody'>
         <div className="postHead">
           <p>
             Publié par : {post.author + " "} 
              le {post.createdAt.split("T")[0] + " à " + post.createdAt.split("T")[1].split(".")[0]}
           </p>
-          {
-            (post.author === user.userName|| user.isAdmin   == 1) && <span className="fontAwesomeSize" onClick={() =>
+          {// eslint-disable-next-line 
+            (post.author === user.userName|| user.isAdmin  == 1) && <span className="fontAwesomeSize" onClick={() =>
               DeletePost(post)
             }>
+              <LikeButton postId={post} />
               <FontAwesomeIcon icon={faTrash} />
             </span>
           }
