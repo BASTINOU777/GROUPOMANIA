@@ -1,7 +1,30 @@
 import React from 'react'
 // import { useForm } from "react-hook-form";
 import { createPost } from "../api/PostsAPI"
+import styled from 'styled-components'
 
+const PostImgContainer = styled.div`
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  height: 170px;
+`
+const PostImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`
+const ButtonLign = styled.div`
+  display: flex;
+`
+const ImgButtonModif = styled.img`
+  height: 35px;
+  padding-right: 10px;
+  &:hover {
+    cursor: pointer;
+  }
+`
 
 function CreatePosts() 
 {
@@ -13,7 +36,8 @@ function CreatePosts()
     let data = {
       title: event.target.titre.value,
       content: event.target.content.value,
-      author: localStorage.getItem("userName")
+      author: localStorage.getItem("userName"),
+      // attachment: event.target.DataTypes.ARRAY(DataTypes.INTEGER)
     }
     createPost(data)
     .then((response) => 
@@ -40,12 +64,28 @@ function CreatePosts()
                   <input type="text" name="content" placeholder='Content'/>
                 </div>
                 <PostImgContainer>
-                <PostImg src={pictures} />{' '}
+                <PostImg src="pictures"/>{' '}
                 </PostImgContainer>
                 <div >
                   <button type="submit" className="button">
                     Poster
                   </button>
+                  <ButtonLign>
+              <ImgButtonModif
+                src={""}
+                alt="Crayon noir qui écrit"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setIsModifRN(true)
+                }}
+              />
+              <SupprButton
+                postId={postId}
+                setApiCalled={setApiCalled}
+                title={title}
+              />
+            </ButtonLign>
+                  
                 </div>
                 
               </form>

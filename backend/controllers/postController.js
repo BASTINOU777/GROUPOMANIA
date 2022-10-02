@@ -33,7 +33,7 @@ exports.createPost = (req, res, next) => {
     author: req.body.author,
     title: req.body.title,
     content: req.body.content,
-    attachement: "test",
+    attachement: "pictures",
   };
   console.log(newPost);
   Post.create(newPost)
@@ -53,8 +53,8 @@ exports.deletePost = (req, res, next) => {
 exports.likePost = (req, res, next) => {
   let Like = req.params.like;
   if (Like == 1) {
-    Post.findByPk(req.params.id)
+    Post.findByPk(req.params.id);
   } else if (Like == 0) {
-    Post.findByPk(req.params.id)
+    Post.findByPk(req.params.id);
   }
 };

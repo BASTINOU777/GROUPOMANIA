@@ -1,8 +1,8 @@
 import "../../styles/Comments.css"
 import { Outlet, Link } from 'react-router-dom'
 import { React} from "react"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleArrowDown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faCircleArrowDown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 import DeleteComment from "./DeleteComments"
 
@@ -43,7 +43,7 @@ function timeToCreation()
 //HTML à l'évent l'user peut like ou dislike
   return(
     <div className='commentTemplate' >
-        <div className="likesBar">
+        {/* <div className="likesBar">
           <span className="fontAwesomeSize" onClick={() =>
             console.log("tu peux like")
           }>
@@ -52,10 +52,10 @@ function timeToCreation()
           <p>{comment.likes}</p>
           <span className="fontAwesomeSize" onClick={() =>
             console.log("tu peux dislike")
-          }>
-            <FontAwesomeIcon icon={faCircleArrowDown} />
+          }> */}
+            {/* <FontAwesomeIcon icon={faCircleArrowDown} />
           </span>
-        </div>
+        </div> */}
         <div className='comBody'>
           <div className="postHead">
             <p>

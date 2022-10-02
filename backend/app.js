@@ -20,7 +20,7 @@ const postRoutes = require("./routes/post-routes");
 const userRoutes = require("./routes/user-routes");
 const signUpRoutes = require("./routes/signUp-routes");
 const commentsRoutes = require("./routes/comments-routes");
-const likesRoutes = require("./routes/likes-routes");
+const likesRoutes = require("./routes/post-routes");
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
