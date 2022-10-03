@@ -1,21 +1,8 @@
 import React from 'react'
+// import { useState } from 'react';
 // import { useForm } from "react-hook-form";
 import { createPost } from "../api/PostsAPI"
-import styled from 'styled-components'
-
-
-const PostImgContainer = styled.div`
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  height: 170px;
-`
-const PostImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`
+import "../styles/Posts.css"
 
 
 function CreatePosts() 
@@ -38,25 +25,21 @@ function CreatePosts()
       window.location.replace("/");
     })
   }
-  //au clic sur le bouton "modifier l'image",fonction de modification de l'image
+  const customTxt = document.getElementById('customText');
+	const realFileBtn = document.getElementById('inputImage');
 
-  function submitFormImg(event)
-  { 
-    event.preventDefault()
-    let data = {
-      title: event.target.titre.value,
-      content: event.target.content.value,
-      author: localStorage.getItem("userName"),
-      attachment: event.target.attachment,
-    }
-    submitFormImg(data)
-    .then((response) => 
-    {
-      console.log(response);
-      alert("L'image à bien était modifiée !");
-      window.location.replace("/");
-    })
-  }
+	const clickRealButton = async () => {
+		const realFileBtn = document.getElementById('inputImage');
+		realFileBtn.click();
+	};
+  
+	const fileSelectedHandler = (event) => {
+		createPost({
+			selectedFile: event.target.files[0],
+		});
+		customTxt.innerHTML = realFileBtn.files[0].name;
+		console.log(realFileBtn.files[0].name);
+	};
     return (
       <main>
         <h1>Publier sur Groupomania</h1>
@@ -72,24 +55,23 @@ function CreatePosts()
                   <label htmlFor="Content">Écrivez votre publication</label><br/>
                   <input type="text" name="content" placeholder='Content'/>
                 </div>
-                <PostImgContainer>
-                <PostImg src={""}/>
-                </PostImgContainer>
-                <div >
-                  <button type="submit" className="button">
-                    Poster
-                  </button>
-                  <form id="submitForm" onSubmit={submitFormImg}>
-                  <button type="submit" className="button">
-                    Modifier l'image
-                  </button>
-                  </form>
-              {/* <SupprButton
-                author={"data.attachment"}
-                
-              /> */}
-                </div>
-                
+                 <label>Ajouter une image :</label>
+				<div className="containerImageUpload">
+					<input
+						type="file"
+						onChange={fileSelectedHandler}
+						id="inputImage"
+						placeholder="Choisir un fichier"
+					/>
+					<button id="customButton" onClick={clickRealButton}>
+						<p>Ajouter une image</p>
+						<span className="material-icons">add_photo_alternate</span>
+					</button>
+					<div className="customText">
+						<span id="customText">Pas d'image ajoutée</span>
+					</div>
+				</div>
+				<button onClick={submitForm}> Publier</button>
               </form>
           </article>
         </section>
