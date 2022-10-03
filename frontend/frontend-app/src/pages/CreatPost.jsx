@@ -3,7 +3,7 @@ import React from 'react'
 import { createPost } from "../api/PostsAPI"
 import { useState } from 'react'
 import styled from 'styled-components'
-import LikeButton from "../pages/LikeButton"
+import LikeButton from "../components/post/LikeButton"
 
 const PostImgContainer = styled.div`
   border-radius: 10px;

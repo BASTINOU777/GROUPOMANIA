@@ -26,14 +26,8 @@ const LikeCount = styled.p`
 
 function LikeButton(post) {
   let userId = JSON.parse(localStorage.getItem("userId"));
-  const [isLiked, setIsLiked] = useState(false)
-
-  const [changeOnLike, setChangeOnLike] = useState(null)
-
   useEffect(() => {
-    if (changeOnLike !== null) {
-      if (changeOnLike === true) {
-        fetch(`http://localhost:3000/api/post/${post.id}/${userId}/1`, {
+        fetch(`http://localhost:3000/api/post/${post.id}/${userId}/`, {
           method: 'PUT',
           headers: {
             Accept: 'application/json',
@@ -52,55 +46,7 @@ function LikeButton(post) {
           .catch(function (err) {
             console.log(err)
           })
-      } else if (changeOnLike === false) {
-        fetch(`http://localhost:3000/api/post/${post.id}/0`, {
-          method: 'PUT',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${userId.token}`,
-          },
-          body: JSON.stringify( userId ),
-        })
-          .then(function (res) {
-            if (res.ok) {
-              return res.json()
-            }
-          })
-          .then(function (value) {
-            setIsLiked(false)
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
-      }
-    }
-  }, [changeOnLike]) // eslint-disable-line react-hooks/exhaustive-deps
-  // let userId = JSON.parse(localStorage.getItem('userId'))
-
-  useEffect(() => {
-    let userId = JSON.parse(localStorage.getItem('userId'))
-    fetch(`http://localhost:3000/api/post/${post.id}/`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userId.token}`,
-      },
-    }).then((response) =>
-      response
-        .json()
-        .then((likesData) => {
-          setLikeCount(likesData.length)
-          if (likesData.length) {
-            const like = likesData.find((e) => e.userId === userId)
-            if (like) {
-              setIsLiked(true)
-            }
-          }
-        })
-        .catch((error) => console.log(error))
-    )
-  }, [isLiked]) 
+  },) 
 
   const [likeCount, setLikeCount] = useState()
 

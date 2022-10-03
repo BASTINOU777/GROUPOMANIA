@@ -95,11 +95,18 @@ exports.deletePost = (req, res, next) => {
     .then(() => res.status(200).json({ message: "Publication supprimée !" }))
     .catch((error) => res.status(400).json({ error }));
 };
+
 exports.likePost = (req, res, next) => {
-  let Like = req.params.like;
-  if (Like == 1) {
-    Post.findByPk(req.params.id);
-  } else if (Like == 0) {
-    Post.findByPk(req.params.id);
-  }
+  Post.findByPk(req.params.id).then((post) => {
+    let index = post.userLiked.findIndex((elem) => elem == req.params.userId);
+    if (index == -1) {
+      post.like++;
+      post.userLiked.push(req.params.userId);
+      //update
+    } else {
+      post.like--;
+      post.userLiked.splice(index, 1);
+      //update
+    }
+  });
 };
