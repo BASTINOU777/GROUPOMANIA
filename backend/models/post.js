@@ -9,6 +9,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       required: true,
       allowNull: false,
+      defaultValue: "",
     },
     author: {
       type: Sequelize.STRING,

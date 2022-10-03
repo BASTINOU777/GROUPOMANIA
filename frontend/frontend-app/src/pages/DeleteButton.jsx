@@ -1,0 +1,56 @@
+import styled from 'styled-components'
+import crosse from "../assets/"
+
+const ImgButton = styled.img`
+  height: 35px;
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+function SupprOnePost({ postId, setApiCalled }) {
+  let login = JSON.parse(localStorage.getItem('login'))
+  fetch(`http://localhost:3000/api/post/${post.id}/${userId}`, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${login.token}`,
+    },
+  })
+    .then(function (res) {
+      if (res.ok) {
+        return res.json()
+      }
+    })
+    .then((value) => {
+      setApiCalled(true)
+    })
+    .catch(function (err) {
+      console.log(err)
+    })
+}
+
+function handleSupprClick({ postId, setApiCalled, title }) {
+  let res = window.confirm(
+    `Êtes-vous sûr de vouloir supprimer ce post : ${title} ?`
+  )
+  if (res) {
+    SupprOnePost({ postId, setApiCalled })
+  }
+}
+
+function SupprButton({ postId, setApiCalled, title }) {
+  return (
+    <ImgButtonCross
+      src={cross}
+      alt=""
+      onClick={(e) => {
+        e.preventDefault()
+        handleSupprClick({ postId, setApiCalled, title })
+      }}
+    />
+  )
+}
+
+export default SupprButton
