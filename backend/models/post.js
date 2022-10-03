@@ -31,8 +31,8 @@ module.exports = (sequelize, Sequelize) => {
       defaultValue: 0,
     },
     userLiked: {
-      type: Sequelize.ARRAY,
-      defaultValue: [],
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
     },
   });
 

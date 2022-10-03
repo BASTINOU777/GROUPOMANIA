@@ -7,7 +7,6 @@ import * as React from "react";
 import LikeButton from "./LikeButton"
 
 
-
 function CustomPost({ value, permissions }){
   const post = value;
   let user = {
@@ -22,8 +21,6 @@ function CustomPost({ value, permissions }){
         window.location.replace(`/`);
     })
   }
-
-
 return(
   <article className='postTemplate' >
       <div className='postBody'>

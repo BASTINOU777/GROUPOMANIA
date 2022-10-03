@@ -3,7 +3,7 @@ import React, { useEffect , useState } from 'react'
 import { updateProfile, deleteProfile } from "../api/UserAPI"
 
 
-function Profile({permissions}) 
+function Profile() 
 {
   const [user, setList] = useState([]);
   let profileUserName = localStorage.getItem('userName') ;

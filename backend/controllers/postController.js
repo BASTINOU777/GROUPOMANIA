@@ -46,16 +46,17 @@ exports.createPost = (req, res, next) => {
     )
     .catch((error) => res.status(400).json(error));
 };
+
 exports.modifyPost = (req, res, next) => {
-  PostModel.findOne({ _id: req.params.id }).then((post) => {
+  Post.findOne({ _id: req.params.id }).then((post) => {
     if (req.file && req.file.mimetype.split("/")[0] === "pictures") {
-      const filename = post.imageURL.split("pictures/")[1];
+      const filename = post.attachement.split("pictures/")[1];
       fs.unlink(`pictures/${filename}`, () => {
-        PostModel.updateOne(
+        Post.updateOne(
           { _id: req.params.id },
           {
             ...req.body,
-            imageURL: `${req.protocol}://${req.get("host")}/pictures${
+            attachement: `${req.protocol}://${req.get("host")}/pictures${
               req.file.filename
             }`,
             _id: req.params.id,
@@ -73,7 +74,7 @@ exports.modifyPost = (req, res, next) => {
           );
       });
     } else {
-      PostModel.updateOne(
+      Post.updateOne(
         { _id: req.params.id },
         {
           ...req.body,
@@ -103,10 +104,41 @@ exports.likePost = (req, res, next) => {
       post.like++;
       post.userLiked.push(req.params.userId);
       //update
+      Post.updateOne(
+        { _id: req.params.userId },
+        {
+          ...req.body,
+          _id: req.params.userId,
+        }
+      )
+        .then(() =>
+          res
+            .status(200)
+            .json({ message: "Vous avez aimé cette publication !" })
+        )
+        .catch(() =>
+          res.status(400).json({ error: "Impossible d'aimer la publication !" })
+        );
     } else {
       post.like--;
       post.userLiked.splice(index, 1);
-      //update
+      Post.updateOne(
+        { _id: req.params.userLiked },
+        {
+          ...req.body,
+          _id: req.params.userLiked,
+        }
+      )
+        .then(() =>
+          res
+            .status(200)
+            .json({ message: "Vous n'aimé plus cette publication !" })
+        )
+        .catch(() =>
+          res
+            .status(400)
+            .json({ error: "Impossible de disliké cette publication !" })
+        );
     }
   });
 };

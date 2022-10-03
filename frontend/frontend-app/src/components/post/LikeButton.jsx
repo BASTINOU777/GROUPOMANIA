@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
 import * as React from "react";
-import heartEmpty from '../assets/heartEmpty.png'
-import heartFull from '../assets/heartFull.png'
+import heartEmpty from "../../assets/heartEmpty.png"
+import heartFull from "../../assets/heartFull.png"
 import styled from 'styled-components'
 
 const LikeLign = styled.div`
@@ -15,7 +15,6 @@ const LikeLign = styled.div`
     cursor: pointer;
   }
 `
-
 const LikeCount = styled.p`
   font-size: 14px;
   padding-left: 10px;
@@ -40,9 +39,6 @@ function LikeButton(post) {
               return res.json()
             }
           })
-          .then(function (value) {
-            setIsLiked(true)
-          })
           .catch(function (err) {
             console.log(err)
           })
@@ -53,57 +49,30 @@ function LikeButton(post) {
   const isPlural = likeCount > 1 ? true : false
 
   if (likeCount === 0) {
-    return isLiked ? (
+    return (
       <LikeLign>
         <ButtonHeart
           alt="Bouton coeur plein"
           src={heartFull}
           onClick={() => {
-            setChangeOnLike(false)
+            useState(false)
           }}
         />
       </LikeLign>
-    ) : (
+    )  (
       <LikeLign>
         <ButtonHeart
           alt="Bouton coeur vide"
           src={heartEmpty}
           onClick={() => {
-            setChangeOnLike(true)
+            useState(true)
           }}
         />
       </LikeLign>
     )
-  } else {
-    return isLiked ? (
-      <LikeLign>
-        <ButtonHeart
-          alt="Bouton coeur pour liker"
-          src={heartFull}
-          onClick={() => {
-            setChangeOnLike(false)
-          }}
-        />
-        <LikeCount>
-          {likeCount} {isPlural ? 'personnes ont liké' : 'personne a liké'}
-        </LikeCount>
-      </LikeLign>
-    ) : (
-      <LikeLign>
-        <ButtonHeart
-          alt="Bouton coeur vide"
-          src={heartEmpty}
-          onClick={() => {
-            setChangeOnLike(true)
-          }}
-        />
-        <LikeCount>
-          {likeCount} {isPlural ? 'personnes ont liké' : 'personne a liké'}
-        </LikeCount>
-      </LikeLign>
-    )
+  } 
   }
-}
+
 
 export default LikeButton
 

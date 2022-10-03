@@ -1,9 +1,8 @@
 import React from 'react'
 // import { useForm } from "react-hook-form";
 import { createPost } from "../api/PostsAPI"
-import { useState } from 'react'
 import styled from 'styled-components'
-import LikeButton from "../components/post/LikeButton"
+
 
 const PostImgContainer = styled.div`
   border-radius: 10px;
@@ -17,21 +16,11 @@ const PostImg = styled.img`
   height: 100%;
   object-fit: cover;
 `
-const ButtonLign = styled.div`
-  display: flex;
-`
-const ImgButtonModif = styled.img`
-  height: 35px;
-  padding-right: 10px;
-  &:hover {
-    cursor: pointer;
-  }
-`
+
 
 function CreatePosts() 
 {
- 
-  //au clic sur le bouton "modifier profil", fonction de mise à jour du profil et reload de la page
+  //au clic sur le bouton "poster", fonction de création de post et reload de la page
   function submitForm(event)
   { 
     event.preventDefault()
@@ -49,7 +38,25 @@ function CreatePosts()
       window.location.replace("/");
     })
   }
-  const [setIsModifRN] = useState(false)
+  //au clic sur le bouton "modifier l'image",fonction de modification de l'image
+
+  function submitFormImg(event)
+  { 
+    event.preventDefault()
+    let data = {
+      title: event.target.titre.value,
+      content: event.target.content.value,
+      author: localStorage.getItem("userName"),
+      attachment: event.target.attachment,
+    }
+    submitFormImg(data)
+    .then((response) => 
+    {
+      console.log(response);
+      alert("L'image à bien était modifiée !");
+      window.location.replace("/");
+    })
+  }
     return (
       <main>
         <h1>Publier sur Groupomania</h1>
@@ -66,28 +73,21 @@ function CreatePosts()
                   <input type="text" name="content" placeholder='Content'/>
                 </div>
                 <PostImgContainer>
-                <PostImg src={"data.attachment"}/>
+                <PostImg src={""}/>
                 </PostImgContainer>
-                <LikeButton author={"data.userName"} />
                 <div >
                   <button type="submit" className="button">
                     Poster
                   </button>
-                  <ButtonLign>
-              <ImgButtonModif
-                src={"data.attachment"}
-                alt="modif image"
-                onClick={(e) => {
-                  e.preventDefault()
-                  setIsModifRN(true)
-                }}
-              />
+                  <form id="submitForm" onSubmit={submitFormImg}>
+                  <button type="submit" className="button">
+                    Modifier l'image
+                  </button>
+                  </form>
               {/* <SupprButton
                 author={"data.attachment"}
                 
               /> */}
-            </ButtonLign>
-                  
                 </div>
                 
               </form>
@@ -96,6 +96,7 @@ function CreatePosts()
       </main>
     )
 }
+
 
 
 export default CreatePosts

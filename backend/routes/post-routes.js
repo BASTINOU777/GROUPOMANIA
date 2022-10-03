@@ -10,6 +10,7 @@ const postCtrl = require("../controllers/postController");
 router.get("/", auth, postCtrl.getAllPosts);
 router.get("/:id", auth, postCtrl.getOnePost);
 router.post("/", auth, postCtrl.createPost);
+router.put("/:id", auth, postCtrl.modifyPost);
 router.delete("/:id", auth, postCtrl.deletePost);
 router.put("/:id/:userId", auth, postCtrl.likePost);
 

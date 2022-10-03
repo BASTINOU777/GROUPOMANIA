@@ -43,19 +43,6 @@ function timeToCreation()
 //HTML à l'évent l'user peut like ou dislike
   return(
     <div className='commentTemplate' >
-        {/* <div className="likesBar">
-          <span className="fontAwesomeSize" onClick={() =>
-            console.log("tu peux like")
-          }>
-          <FontAwesomeIcon icon={faCircleArrowUp} />
-          </span>
-          <p>{comment.likes}</p>
-          <span className="fontAwesomeSize" onClick={() =>
-            console.log("tu peux dislike")
-          }> */}
-            {/* <FontAwesomeIcon icon={faCircleArrowDown} />
-          </span>
-        </div> */}
         <div className='comBody'>
           <div className="postHead">
             <p>

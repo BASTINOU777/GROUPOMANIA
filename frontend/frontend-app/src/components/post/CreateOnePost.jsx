@@ -1,8 +1,8 @@
-import CustomPost from '../components/post/CustomPost'
-import Comments from '../components/Comments/Comments'
+import CustomPost from './CustomPost'
+import Comments from '../Comments/Comments'
 import React, { useEffect, useState } from 'react'
-import { getOnePost } from '../api/PostsAPI'
-import postComments from '../components/Comments/postComments'
+import { getOnePost } from '../../api/PostsAPI'
+import postComments from '../Comments/postComments'
 
 function CreateOnePost({permissions}) 
 {
