@@ -34,19 +34,22 @@
     align-items: center;
 }
 
-.fontAwesomeSize {
-    font-size: 1.5em;
-}
 .containerImageUpload {
     display: flex;
     align-items: center;
-  }
-  
-  .containerImageUpload input[type='file'] {
+    color: aqua;
+}
+
+.containerImageUpload input[type="filename"] {
     display: none;
-  }
-  
-  .containerImageUpload span {
-    color: grey;
+    color: blue;
+}
+
+.containerImageUpload span {
+    color: red;
     text-align: center;
-  }
+}
+
+.fontAwesomeSize {
+    font-size: 1.5em;
+}

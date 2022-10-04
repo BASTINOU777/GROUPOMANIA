@@ -7,6 +7,8 @@ import * as React from "react";
 import LikeButton from "./LikeButton"
 
 
+
+
 function CustomPost({ value, permissions }){
   const post = value;
   let user = {
@@ -36,15 +38,17 @@ return(
               <LikeButton postId={post} />
               <FontAwesomeIcon icon={faTrash} />
             </span>
-          }
-          
+          }   
         </div>
-        
-       
           <h2>{post.title}</h2>
           <div className="post">{post.content}</div>
           <p className="postFeet"> {/*{post.commentNumber} Commentaire(s) */} </p>
-        
+      </div>
+      <div className="containerImageUpload">
+      <img
+        src={post.pictures}
+        alt="image posté"
+        ></img>
       </div>
     <Outlet />
   </article>
