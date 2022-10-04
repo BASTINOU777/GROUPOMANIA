@@ -34,22 +34,6 @@
     align-items: center;
 }
 
-.containerImageUpload {
-    display: flex;
-    align-items: center;
-    color: aqua;
-}
-
-.containerImageUpload input[type="filename"] {
-    display: none;
-    color: blue;
-}
-
-.containerImageUpload span {
-    color: red;
-    text-align: center;
-}
-
 .fontAwesomeSize {
     font-size: 1.5em;
 }

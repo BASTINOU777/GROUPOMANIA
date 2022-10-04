@@ -5,8 +5,22 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Outlet } from 'react-router-dom'
 import * as React from "react";
 import LikeButton from "./LikeButton"
+import styled from "styled-components";
 
+const PostImgContainer = styled.div`
+  display: flex;
+  max-width: 90%;
+  height: 300px;
+  margin-top: 15px;
+  overflow: hidden;
+  border-radius: 35px;
+`;
 
+const PostImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
 
 
 function CustomPost({ value, permissions }){
@@ -31,6 +45,16 @@ return(
             Publié par : {post.author + " "} 
              le {post.createdAt.split("T")[0] + " à " + post.createdAt.split("T")[1].split(".")[0]}
           </p>
+          </div>
+          <PostImgContainer>
+            <PostImg src={post.attachement} alt="image du post" />
+          </PostImgContainer>
+          <div className="post">{post.content}
+          <h2>{post.title}</h2>
+          {/* <p className="postFeet"> 
+          {post.commentNumber} Pour mettre des Commentaire(s)  
+          </p> */}
+          </div>
           {// eslint-disable-next-line 
             (post.author === user.userName|| user.isAdmin  == 1) && <span className="fontAwesomeSize" onClick={() =>
               DeletePost(post)
@@ -39,16 +63,9 @@ return(
               <FontAwesomeIcon icon={faTrash} />
             </span>
           }   
-        </div>
-          <h2>{post.title}</h2>
-          <div className="post">{post.content}</div>
-          <p className="postFeet"> {/*{post.commentNumber} Commentaire(s) */} </p>
-      </div>
-      <div className="containerImageUpload">
-      <img
-        src={post.pictures}
-        alt="image posté"
-        ></img>
+        
+          
+          
       </div>
     <Outlet />
   </article>
