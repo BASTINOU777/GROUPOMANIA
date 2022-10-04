@@ -9,25 +9,29 @@ import "../styles/Posts.css"
 
 function CreatePosts() 
 {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setPostText] = useState(null);
+
   //au clic sur le bouton "poster", fonction de création de post et reload de la page
-  function submitForm(event)
+  // function submitForm(event)
+  function submitForm(event) 
   { 
+    console.log("ok")
     event.preventDefault()
-    let data = {
+    console.log(event.target);
+    let filename = {
       title: event.target.titre.value,
       content: event.target.content.value,
       author: localStorage.getItem("userName"),
       attachement: selectedFile
     }
-    console.log(data)
-    // createPost(data)
-    // .then((response) => 
-    // {
-    //   console.log(response);
-    //   alert("Le Post a bien été crée");
-    //   window.location.replace("/");
-    // })
+    console.log(filename)
+    createPost(filename)
+    .then((response) => 
+    {
+      console.log(response);
+      alert("Le Post a bien été crée");
+      window.location.replace("/");
+    })
   } 
    
     return (
@@ -36,7 +40,7 @@ function CreatePosts()
         <section>
           <article>
           <h2>Créer une publication</h2>
-            <form id="submitForm">
+          <form onSubmit={submitForm}>
               <div>
                   <label htmlFor="Titre">Titre: </label><br/>
                   <input type="text" name="titre" placeholder='Titre'/>
@@ -48,10 +52,13 @@ function CreatePosts()
                  <label>Ajouter une image :</label>
                  <input
           type="file"
-          value={selectedFile}
-          onChange={(e) => setSelectedFile(e.target.files[0])}
+          value={selectedFile ? selectedFile :""}
+          onChange= {(event) => {
+						setPostText(event.target.value);
+					}}
         />
-				<button onClick={submitForm}> Publier</button>
+        
+				<button> Publier</button>
               </form>
           </article>
         </section>

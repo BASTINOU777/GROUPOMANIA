@@ -29,29 +29,55 @@ exports.getOnePost = (req, res, next) => {
 
 exports.createPost = (req, res, next) => {
   console.log(req.body);
-  const newPost = {
-    author: req.body.author,
-    title: req.body.title,
-    content: req.body.content,
-    attachement: `${req.protocol}://${req.get("host")}/pictures/${
-      req.file.filename
-    }`,
-  };
-  console.log(newPost);
-  Post.create(newPost)
-    .then((data) =>
-      res
-        .status(201)
-        .json({ message: "Nouvelle publication enregistrée !", data })
-    )
-    .catch((error) => res.status(400).json(error));
+  if (req.file && req.file.mimetype.split("/")[0] === "pictures") {
+    const post = new Post({
+      author: req.body.author,
+      title: req.body.title,
+      content: req.body.content,
+      attachement: `${req.protocol}://${req.get("host")}/pictures/posts${
+        req.file.filename
+      }`,
+    });
+    post
+      .save()
+      .then(() =>
+        res.status(200).json({
+          message: "votre publication avec votre image à était postée !",
+        })
+      )
+      .catch(() =>
+        res.status(400).json({
+          error: "impossible de créer votre publication avec une image",
+        })
+      );
+  } else {
+    const post = new Post({
+      author: req.body.author,
+      title: req.body.title,
+      content: req.body.content,
+    });
+    post
+      .save()
+      .then(() => res.status(200).json({ message: "posté!" }))
+      .catch(() => res.status(400).json({ error: "non postée" }));
+  }
 };
+//     console.log(newPost);
+//     Post.create(newPost)
+//       .then((data) =>
+//         res
+//           .status(201)
+//           .json({ message: "Nouvelle publication enregistrée !", data })
+//       )
+//       .catch((error) => res.status(400).json(error));
+//   }
+// };
 
 exports.modifyPost = (req, res, next) => {
   Post.findOne({ _id: req.params.id }).then((post) => {
     if (req.file && req.file.mimetype.split("/")[0] === "pictures") {
-      const filename = post.attachement.split("pictures/")[1];
-      fs.unlink(`pictures/${filename}`, () => {
+      const data = post.attachement.split("pictures/")[1];
+      fs.unlink(`pictures/${data}`, () => {
         Post.updateOne(
           { _id: req.params.id },
           {
