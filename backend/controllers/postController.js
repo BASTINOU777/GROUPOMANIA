@@ -3,9 +3,10 @@ const db = require("../models/index");
 const Post = db.Post;
 
 exports.getAllPosts = (req, res, next) => {
-  console.log("test");
+  console.log("test get all posts");
   Post.findAll()
     .then((allPosts) => {
+      console.log("je suis dans allposts", allPosts);
       res.status(200).json(allPosts);
     })
     .catch((error) => {
@@ -123,48 +124,48 @@ exports.deletePost = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
-exports.likePost = (req, res, next) => {
-  Post.findByPk(req.params.id).then((post) => {
-    let index = post.userLiked.findIndex((elem) => elem == req.params.userId);
-    if (index == -1) {
-      post.like++;
-      post.userLiked.push(req.params.userId);
-      //update
-      Post.updateOne(
-        { _id: req.params.userId },
-        {
-          ...req.body,
-          _id: req.params.userId,
-        }
-      )
-        .then(() =>
-          res
-            .status(200)
-            .json({ message: "Vous avez aimé cette publication !" })
-        )
-        .catch(() =>
-          res.status(400).json({ error: "Impossible d'aimer la publication !" })
-        );
-    } else {
-      post.like--;
-      post.userLiked.splice(index, 1);
-      Post.updateOne(
-        { _id: req.params.userLiked },
-        {
-          ...req.body,
-          _id: req.params.userLiked,
-        }
-      )
-        .then(() =>
-          res
-            .status(200)
-            .json({ message: "Vous n'aimé plus cette publication !" })
-        )
-        .catch(() =>
-          res
-            .status(400)
-            .json({ error: "Impossible de disliké cette publication !" })
-        );
-    }
-  });
-};
+// exports.likePost = (req, res, next) => {
+//   Post.findByPk(req.params.id).then((post) => {
+//     let index = post.userLiked.findIndex((elem) => elem == req.params.userId);
+//     if (index == -1) {
+//       post.like++;
+//       post.userLiked.push(req.params.userId);
+//       //update
+//       Post.updateOne(
+//         { _id: req.params.userId },
+//         {
+//           ...req.body,
+//           _id: req.params.userId,
+//         }
+//       )
+//         .then(() =>
+//           res
+//             .status(200)
+//             .json({ message: "Vous avez aimé cette publication !" })
+//         )
+//         .catch(() =>
+//           res.status(400).json({ error: "Impossible d'aimer la publication !" })
+//         );
+//     } else {
+//       post.like--;
+//       post.userLiked.splice(index, 1);
+//       Post.updateOne(
+//         { _id: req.params.userLiked },
+//         {
+//           ...req.body,
+//           _id: req.params.userLiked,
+//         }
+//       )
+//         .then(() =>
+//           res
+//             .status(200)
+//             .json({ message: "Vous n'aimé plus cette publication !" })
+//         )
+//         .catch(() =>
+//           res
+//             .status(400)
+//             .json({ error: "Impossible de disliké cette publication !" })
+//         );
+//     }
+//   });
+// };
