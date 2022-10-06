@@ -30,7 +30,6 @@ function CustomPost({ value, permissions }){
     isAdmin: localStorage.getItem("isAdmin")
   }
   function DeletePost(item){
-  
     deletePost(item.id)
     .then(()=>{
         window.location.reload();
@@ -51,8 +50,9 @@ return(
           </PostImgContainer>
           <div className="post">{post.content}
           <h2>{post.title}</h2>
-          {/* <p className="postFeet"> 
-          {post.commentNumber} Pour mettre des Commentaire(s)  
+          {/*// Pour mettre des Commentaire(s) 
+          <p className="postFeet"> 
+          {post.commentNumber}  
           </p> */}
           </div>
           {// eslint-disable-next-line 
@@ -62,10 +62,7 @@ return(
               <LikeButton postId={post} />
               <FontAwesomeIcon icon={faTrash} />
             </span>
-          }   
-        
-          
-          
+          }      
       </div>
     <Outlet />
   </article>

@@ -3,9 +3,9 @@ const db = require("../models");
 
 exports.getLike = (req, res, next) => {
   const query = `SELECT * FROM postLike WHERE postLike.postId = ${req.params.id}`;
-  pool.query(query, (error, results) => {
+  db.query(query, (error, results) => {
     if (!results) {
-      res.json({ status: "Not found!" });
+      res.json({ status: "dans le GetLike!" });
     } else {
       res.json(results);
     }
@@ -23,14 +23,14 @@ exports.like = (req, res, next) => {
   db.query(query, Object.values(postLikeData), (error) => {
     if (error) {
       res.json({
-        status: "Failed to like post",
+        status: "like: je ne peux pas liké",
         reason: error.code,
         reason2: error,
       });
     } else {
       res.json({
-        status: "Post successfully liked",
-        postLikeData: postLikeData,
+        status: "Like: le post est liké",
+        postLikeData: postLikeData
       });
     }
   });
