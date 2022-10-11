@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
+import React from 'react'
 // import styled from 'styled-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+  import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
 // //state
 const Like =({ post, userId }) => {
@@ -74,7 +77,7 @@ return (
                 :
                 <FontAwesomeIcon icon={faThumbsUp} className='post-icons' onClick={() => handleLike()} />
             }
-            {likesCount > 0 && <p>{likesCount}</p>}
+            {postLike > 0 && <p>{postLike}</p>}
         </div>
   )
 };
