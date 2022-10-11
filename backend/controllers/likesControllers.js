@@ -12,7 +12,7 @@ exports.getLike = (req, res, next) => {
   });
 };
 
-exports.like = (req, res, next) => {
+exports.likePost = (req, res, next) => {
   const postLikeData = {
     userId: req.auth.userId,
     postId: req.body.postId,
@@ -30,20 +30,20 @@ exports.like = (req, res, next) => {
     } else {
       res.json({
         status: "Like: le post est liké",
-        postLikeData: postLikeData
+        postLikeData: postLikeData,
       });
     }
   });
 };
 
-exports.deleteLike = (req, res, next) => {
-  const query = `DELETE FROM postLike WHERE userId = ${req.auth.userId} AND postId = ${req.params.id}`;
+// exports.deleteLike = (req, res, next) => {
+//   const query = `DELETE FROM postLike WHERE userId = ${req.auth.userId} AND postId = ${req.params.id}`;
 
-  db.query(query, (error) => {
-    if (error) {
-      res.json({ status: "Fail to delete", reason: error.code });
-    } else {
-      res.json({ status: "Successfully deleted", data: req.params.id });
-    }
-  });
-};
+//   db.query(query, (error) => {
+//     if (error) {
+//       res.json({ status: "Fail to delete", reason: error.code });
+//     } else {
+//       res.json({ status: "Successfully deleted", data: req.params.id });
+//     }
+//   });
+// };

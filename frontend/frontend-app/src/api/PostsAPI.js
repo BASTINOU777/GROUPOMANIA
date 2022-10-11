@@ -4,8 +4,11 @@ const HEADERS_CONTENT = new Headers({
   Authorization: `Bearer ${localStorage.getItem("token")}`,
 });
 
+const getHeaders = () => {};
+
 export async function getAllPosts() {
-  console.log(HEADERS_CONTENT);
+  const headers = getHeaders();
+  console.log("mes headers", HEADERS_CONTENT);
 
   const response = await fetch("http://localhost:3001/api/post/", {
     method: "GET",

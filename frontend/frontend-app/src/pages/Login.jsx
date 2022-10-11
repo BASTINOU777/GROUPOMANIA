@@ -26,6 +26,23 @@ function Login()
         localStorage.setItem('userName', response.userName);
         localStorage.setItem('email', response.email);
         localStorage.setItem('isAdmin',response.isAdmin);
+
+        /*
+        let text = 'coucou bastien'
+        text = 'coucou ' + 'bastien'
+        
+        const prenom = 'bastien'
+        text = 'coucou ' + prenom
+
+        text = `coucou ${prenom}`
+
+        const article = `<article>
+          <p>Coucou ${prenom}</p>
+        </article>`
+
+        document.getElementById('ancre').innerHTML = article;
+      */
+
         
         window.location.replace(`/profile/${response.userName}`);
         console.log(response.userInfos)

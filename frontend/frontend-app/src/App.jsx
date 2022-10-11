@@ -12,11 +12,11 @@ import Login from "./pages/Login"
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
 
-import CreateOnePost from './components/post/CreateOnePost'
+import CreateOnePost from './components/Posts/CreateOnePost'
 import CreatePost from './pages/CreatPost'
-import Logout from './pages/logOut'
+import Logout from './pages/LogOut'
 import PageNotFound from "./pages/PageNotfound"
-import getPermissions from "./api/AuthAPI"
+import GetPermissions from "./api/AuthAPI"
 
 
 //configuration de mon app, je récupére le token et le userName ds le LS
@@ -30,7 +30,7 @@ console.log(user);
     const token = localStorage.getItem('token');
     if (token)
     {
-      getPermissions(token)
+      GetPermissions(token)
       .then((response) => {
         setPermissions(response);
       })
@@ -49,7 +49,6 @@ console.log(user);
           <Route  path="/logout" element={<Logout />} />
           <Route path="/createPost" element={<CreatePost permissions={permissions} />} />
           <Route  path="/post/:id" element={<CreateOnePost permissions={permissions} />} />
-
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

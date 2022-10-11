@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Outlet } from 'react-router-dom'
 import * as React from "react";
-import LikeButton from "./LikeButton"
+import LikeButton from "./LikesPosts"
 import styled from "styled-components";
 
 const PostImgContainer = styled.div`

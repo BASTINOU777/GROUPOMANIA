@@ -45,7 +45,7 @@ export async function signUp(user) {
     });
 }
 
-export default async function getPermissions(token) {
+export default async function GetPermissions(token) {
   return fetch("http://localhost:3001/api/signup/permissions", {
     method: "GET",
     headers: {
