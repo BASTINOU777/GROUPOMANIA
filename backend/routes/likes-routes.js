@@ -8,10 +8,9 @@ const router = express.Router();
 const userAuth = require("../middleware/tokenAuth");
 
 // On importe le controller pour les likes
-const postCtrl = require("../controllers/likesControllers");
+const postCtrl = require("../controllers/like");
 
 // route des likes
-router.get("/post/:id/like", userAuth, postCtrl.getLike);
-router.post("/post/:id/like", userAuth, postCtrl.likePost);
+router.get("/:id/like", userAuth, postCtrl.Like);
 
 module.exports = router;

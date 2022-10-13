@@ -3,10 +3,6 @@ import { useState, useRef } from 'react';
 // import { useForm } from "react-hook-form";
 import { createPost } from "../api/PostsAPI"
 // import "../styles/Posts.css"
-
-
-
-
 function CreatePosts() 
 {
   const [selectedFile, setPostText] = useState(null);

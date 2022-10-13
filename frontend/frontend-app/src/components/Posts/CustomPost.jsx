@@ -35,6 +35,7 @@ function CustomPost({ value, permissions }){
         window.location.reload();
         window.location.replace(`/`);
     })
+    console.log("========> dans le deletepost", item.id)
   }
 return(
   <article className='postTemplate' >

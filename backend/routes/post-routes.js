@@ -2,7 +2,7 @@
 const express = require("express");
 const router = require("express").Router();
 const auth = require("../middleware/tokenAuth");
-const postCtrl = require("../controllers/postController");
+const postCtrl = require("../controllers/post");
 
 /*----- CRUD pour un Post ----------*/
 

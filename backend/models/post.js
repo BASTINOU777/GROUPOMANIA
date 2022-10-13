@@ -30,10 +30,18 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.INTEGER,
       defaultValue: 0,
     },
+    // dislikes: {
+    //   type: Sequelize.INTEGER,
+    //   defaultValue: 0,
+    // },
     userLiked: {
       type: Sequelize.INTEGER,
       defaultValue: 0,
     },
+    // userDisliked: {
+    //   type: Sequelize.INTEGER,
+    //   defaultValue: 0,
+    // },
   });
 
   return Post;

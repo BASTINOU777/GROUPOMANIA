@@ -3,10 +3,10 @@ import React from 'react'
 // import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
   import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
-
+  
 // //state
-const Like =({ post, userId }) => {
-    const id = post.id;
+const Like = ({ post, userId }) => {
+  const id = post.id;
     const [postLike, setPostLike] = useState()
     const [userLiked, setUserLiked] = useState()
 //vérifie si l'user à like le post
@@ -25,11 +25,12 @@ const Like =({ post, userId }) => {
 useEffect(() =>{
   const getLikes = async () => {
     try {
-      const res = await fetch (`http://localhost:3001/api/post/${id}/like`,)
+      const res = await fetch (`http://localhost:3001/api/post/${post.id}/like`,)
       const data = await res.json();
       if (!res.ok) return 
       const isLiked = checkLikes(data.like, userId);
       console.log( "===>", isLiked );
+      console.log("======>>>>>>>", id);
       setUserLiked(isLiked);
       setPostLike(data.like.length);
       return data
@@ -57,7 +58,7 @@ useEffect(() =>{
 }
 
 try {
-  const res = await fetch (`http://localhost:3001/api/post/${id}/like`, apiLike);
+  const res = await fetch (`http://localhost:3001/api/post/like/${id}`, apiLike);
   const data = await res.json();
   if (!res.ok)return;
   setUserLiked(!userLiked)

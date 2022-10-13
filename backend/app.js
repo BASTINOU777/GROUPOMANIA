@@ -59,6 +59,8 @@ app.use("/api/auth", helmet(), userRoutes);
 //route pour les commentaires des users
 app.use("/api/comment", helmet(), commentsRoutes);
 
+app.use("/api/like", helmet(), likesRoutes);
+
 //route qui sécurise les headers
 app.use(helmet());
 

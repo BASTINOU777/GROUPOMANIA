@@ -7,7 +7,7 @@ const router = express.Router();
 //importation du middleware d'authentification pour les tokens
 const auth = require("../middleware/tokenAuth");
 //importation du controller pour les users
-const userCtrl = require("../controllers/userController");
+const userCtrl = require("../controllers/user");
 
 /*---- Les routes CRUD des user-----*/
 
