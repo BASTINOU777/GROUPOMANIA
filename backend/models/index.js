@@ -19,13 +19,13 @@ const db = {};
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.User = require("./user")(sequelize, Sequelize);
-db.Post = require("./post")(sequelize, Sequelize);
-db.Com = require("./com")(sequelize, Sequelize);
+db.users = require("./users")(sequelize, Sequelize);
+db.posts = require("./posts")(sequelize, Sequelize);
+db.likes = require("./likes")(sequelize, Sequelize);
 
-db.Com.belongsTo(db.Post, {
+db.posts.belongsTo(db.posts, {
   onDelete: "CASCADE",
 });
-db.Post.hasMany(db.Post);
+db.posts.hasMany(db.posts);
 
 module.exports = db;

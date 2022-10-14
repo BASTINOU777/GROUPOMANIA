@@ -3,10 +3,6 @@ const http = require("http");
 // importation de l'app
 const app = require("./app");
 
-
-
-
-
 /* Création de l'app Server */
 
 // Renvoie un port valide, qu'il soit fourni sous la forme d'un numéro ou d'une chaîne
@@ -58,4 +54,3 @@ server.on("listening", () => {
 });
 // on écoute le seveur
 server.listen(port);
-

@@ -22,10 +22,10 @@ function Login()
       if (response.token) 
       {
         localStorage.setItem('token', response.token);
-        localStorage.setItem('userId', response.userId);
-        localStorage.setItem('userName', response.userName);
+        localStorage.setItem('user_id', response.user_id);
+        localStorage.setItem('username', response.username);
         localStorage.setItem('email', response.email);
-        localStorage.setItem('isAdmin',response.isAdmin);
+        localStorage.setItem('is_admin',response.is_admin);
 
         /*
         let text = 'coucou bastien'
@@ -44,8 +44,8 @@ function Login()
       */
 
         
-        window.location.replace(`/profile/${response.userName}`);
-        console.log(response.userInfos)
+        window.location.replace(`/profiles/${response.username}`);
+        // console.log(response.userInfos)
       }
       else
       {

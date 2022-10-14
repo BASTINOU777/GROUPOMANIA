@@ -1,25 +1,25 @@
-import "../../styles/Banner.css"
-import { Outlet, Link } from 'react-router-dom'
-import React from "react"
-import logoDesktop from "../../assets/icon-left-font-monochrome-white.svg"
-import mobileLogo from "../../assets/icon-left-font-monochrome-white.svg" 
+import "../styles/Banner.css";
+import logoDesktop from "../assets/icon-left-font-monochrome-white.png";
+import mobileLogo from ""
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse, faScroll, faUser, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-
+import { Outlet, Link } from 'react-router-dom'
 
 // fonction pour se connecter
 function ConnectToBanner() {
-  let username = localStorage.getItem("username");
-  console.log(username);
- 
+  let profile = JSON.parse(localStorage.getItem("users"));
+  let username = profile.username;
+  //console.log(userName)
+
   return (
+    //ajout des composants 
     <header>
       <div>
         <Link to="/">
           <span className="logoMobile">
             <img src={mobileLogo} alt="logo Groupomania" />
           </span>
-          <span className="logoDesktop">
+          <span className="logoDesktopDisplay">
             <img src={logoDesktop} alt="logo de groupomania" />
           </span>
         </Link>
@@ -29,7 +29,7 @@ function ConnectToBanner() {
           <span className="bannerMobile">
             <FontAwesomeIcon icon={faHouse} />
           </span>
-          <span className="bannerDesktop">Fils d'actus</span>
+          <span className="bannerDesktop">Accueil</span>
         </Link>
         <Link to="/createPost">
           <span className="fontAwesomeSize, bannerMobile">
@@ -52,8 +52,7 @@ function ConnectToBanner() {
       </nav>
       <Outlet />
     </header>
-  )
-  
+  );
 }
 
 export default ConnectToBanner;

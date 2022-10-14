@@ -1,6 +1,6 @@
 const HEADERS_CONTENT = new Headers({
   "Content-Type": "application/json",
-  "User-ID": localStorage.getItem("userId"),
+  "User-ID": localStorage.getItem("user_id"),
   Authorization: `Bearer ${localStorage.getItem("token")}`,
 });
 
@@ -10,7 +10,7 @@ export async function getAllPosts() {
   const headers = getHeaders();
   console.log("mes headers", HEADERS_CONTENT);
 
-  const response = await fetch("http://localhost:3001/api/post/", {
+  const response = await fetch("http://localhost:3001/api/posts/", {
     method: "GET",
     headers: HEADERS_CONTENT,
   });
@@ -25,7 +25,7 @@ export async function getAllPosts() {
 
 export async function getOnePost(pageId) {
   console.log(HEADERS_CONTENT);
-  const response = await fetch("http://localhost:3001/api/post/" + pageId, {
+  const response = await fetch("http://localhost:3001/api/posts/" + pageId, {
     method: "GET",
     headers: HEADERS_CONTENT,
   });
@@ -37,7 +37,7 @@ export async function getOnePost(pageId) {
   return jsonResponse;
 }
 export async function createPost(data) {
-  return fetch("http://localhost:3001/api/post/", {
+  return fetch("http://localhost:3001/api/posts/", {
     method: "POST",
     headers: HEADERS_CONTENT,
     body: JSON.stringify(data),
@@ -45,7 +45,7 @@ export async function createPost(data) {
 }
 
 export async function deletePost(id) {
-  return fetch("http://localhost:3001/api/post/" + id, {
+  return fetch("http://localhost:3001/api/posts/" + id, {
     method: "DELETE",
     headers: HEADERS_CONTENT,
   }).then((data) => data.json());

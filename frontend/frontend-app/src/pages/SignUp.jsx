@@ -15,7 +15,7 @@ function SignUp() {
         alert("inscription valide");
         window.location.replace("/login");
       }
-    )
+    ).catch((error) => console.error(error))
     } else {
       alert("les mots de passe doivent être identiques");
     }
@@ -26,8 +26,6 @@ function SignUp() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
-
 
   function handleCustom(event) {
     event.preventDefault();
@@ -38,11 +36,10 @@ function SignUp() {
     console.log (formObject); 
     submitManager(formObject);
     handleSubmit(formObject);
-  
   }
   
   const schema = {
-    userName: {
+    username: {
       required: "Ce champ est requis",
       minLength: {
         value: 4,
@@ -77,11 +74,11 @@ function SignUp() {
 
           <form id="form" onSubmit={handleCustom}>        
             <div>
-              <label htmlFor="userName">pseudo: </label>
+              <label htmlFor="username">pseudo: </label>
               <br />
               <input
                 type="string"
-                {...register("userName", schema.userName)}
+                {...register("username", schema.username)}
                 placeholder="name"
               />
               

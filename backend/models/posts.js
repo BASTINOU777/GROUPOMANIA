@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Post = sequelize.define("Post", {
+  const posts = sequelize.define("posts", {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
@@ -26,23 +26,8 @@ module.exports = (sequelize, Sequelize) => {
       required: true,
       allowNull: false,
     },
-    likes: {
-      type: Sequelize.INTEGER,
-      defaultValue: 0,
-    },
-    // dislikes: {
-    //   type: Sequelize.INTEGER,
-    //   defaultValue: 0,
-    // },
-    userLiked: {
-      type: Sequelize.INTEGER,
-      defaultValue: 0,
-    },
-    // userDisliked: {
-    //   type: Sequelize.INTEGER,
-    //   defaultValue: 0,
-    // },
+    
   });
 
-  return Post;
+  return posts;
 };

@@ -1,8 +1,8 @@
 // importation des modules
 const express = require("express");
 const router = require("express").Router();
-const auth = require("../middleware/tokenAuth");
-const postCtrl = require("../controllers/post");
+const auth = require("../middlewares/tokenAuth");
+const postCtrl = require("../controllers/posts");
 
 /*----- CRUD pour un Post ----------*/
 

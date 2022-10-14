@@ -1,7 +1,7 @@
-export async function login(user) {
-  console.log(user);
-  const email = user.email;
-  const password = user.password;
+export async function login(users) {
+  console.log("====>>", users);
+  const email = users.email;
+  const password = users.password;
   return fetch("http://localhost:3001/api/signup/login", {
     method: "POST",
     headers: {
@@ -21,30 +21,32 @@ export async function login(user) {
     });
 }
 
-export async function signUp(user) {
-  const userName = user.userName;
-  const email = user.email;
-  const password = user.password1;
-  return fetch("http://localhost:3001/api/signup/signup", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      userName,
-      email,
-      password,
-    }),
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .catch(function (error) {
-      alert("erreur depuis AuthAPI.js" + error);
-    });
-}
+export async function signUp(users) {
+  const username = users.username;
+  const email = users.email;
+  const password = users.password1;
 
+  const body = {
+    username,
+    email,
+    password,
+  };
+
+  try {
+    const response = await fetch("http://localhost:3001/api/signup/signup", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    const responseJson = await response.json();
+    return responseJson;
+  } catch (error) {
+    alert("erreur depuis AuthAPI.js" + error);
+  }
+}
 export default async function GetPermissions(token) {
   return fetch("http://localhost:3001/api/signup/permissions", {
     method: "GET",

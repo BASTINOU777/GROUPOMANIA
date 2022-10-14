@@ -1,6 +1,6 @@
 const { post } = require("../app");
 const db = require("../models/index");
-const Post = db.Post;
+const Post = db.posts;
 
 exports.getAllPosts = (req, res, next) => {
   console.log("test get all posts");
@@ -17,7 +17,7 @@ exports.getAllPosts = (req, res, next) => {
 };
 
 exports.getOnePost = (req, res, next) => {
-  Post.findByPk(req.params.id, { include: ["user", db.comments] })
+  Post.findByPk(req.params.id)
     .then((onePost) => {
       res.status(200).json(onePost);
     })
@@ -31,7 +31,7 @@ exports.getOnePost = (req, res, next) => {
 exports.createPost = (req, res, next) => {
   console.log(req.body);
   if (req.file && req.file.mimetype.split("/")[0] === "pictures") {
-    const post = new Post({
+    const posts = new Post({
       author: req.body.author,
       title: req.body.title,
       content: req.body.content,
@@ -39,7 +39,7 @@ exports.createPost = (req, res, next) => {
         req.file.filename
       }`,
     });
-    post
+    posts
       .save()
       .then(() =>
         res.status(200).json({
@@ -52,12 +52,12 @@ exports.createPost = (req, res, next) => {
         })
       );
   } else {
-    const post = new Post({
+    const posts = new Post({
       author: req.body.author,
       title: req.body.title,
       content: req.body.content,
     });
-    post
+    posts
       .save()
       .then(() => res.status(200).json({ message: "posté!" }))
       .catch(() => res.status(400).json({ error: "non postée" }));
@@ -75,9 +75,9 @@ exports.createPost = (req, res, next) => {
 // };
 
 exports.modifyPost = (req, res, next) => {
-  Post.findOne({ _id: req.params.id }).then((post) => {
+  Post.findOne({ _id: req.params.id }).then((posts) => {
     if (req.file && req.file.mimetype.split("/")[0] === "pictures") {
-      const data = post.attachement.split("pictures/")[1];
+      const data = posts.attachement.split("pictures/")[1];
       fs.unlink(`pictures/${data}`, () => {
         Post.updateOne(
           { _id: req.params.id },
@@ -123,4 +123,3 @@ exports.deletePost = (req, res, next) => {
     .then(() => res.status(200).json({ message: "Publication supprimée !" }))
     .catch((error) => res.status(400).json({ error }));
 };
-

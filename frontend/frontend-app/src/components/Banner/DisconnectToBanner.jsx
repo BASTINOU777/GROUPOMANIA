@@ -18,7 +18,7 @@ function DisconnectToBanner() {
           </Link>
         </div>
         <nav>
-          <Link to="/signUp">
+          <Link to="/signup">
             <span className="fontAwesomeSize, bannerMobile"><FontAwesomeIcon icon={faUserPlus} /></span>
             <span className="bannerDesktop">S'inscrire</span>
           </Link>

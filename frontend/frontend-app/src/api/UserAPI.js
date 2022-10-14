@@ -1,5 +1,5 @@
-export async function updateProfile(user, data) {
-  return fetch(`http://localhost:3001/api/auth/${user}`, {
+export async function updateProfile(users, data) {
+  return fetch(`http://localhost:3001/api/auth/${users}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -17,8 +17,8 @@ export async function updateProfile(user, data) {
     });
 }
 
-export async function getProfile(user) {
-  return fetch(`http://localhost:3001/api/auth/${user}`, {
+export async function getProfile(users) {
+  return fetch(`http://localhost:3001/api/auth/${users}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -33,10 +33,10 @@ export async function getProfile(user) {
     });
 }
 
-export async function deleteProfile(user) {
-  console.log(user);
-  console.log(user.userName);
-  return fetch(`http://localhost:3001/api/profile/${user.userName}`, {
+export async function deleteProfile(users) {
+  console.log(users);
+  console.log(users.username);
+  return fetch(`http://localhost:3001/api/profile/${users.username}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

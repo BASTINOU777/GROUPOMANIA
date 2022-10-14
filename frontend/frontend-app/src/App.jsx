@@ -11,8 +11,6 @@ import SignUp from "./pages/SignUp"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
-
-import CreateOnePost from './components/Posts/CreateOnePost'
 import CreatePost from './pages/CreatPost'
 import Logout from './pages/LogOut'
 import PageNotFound from "./pages/PageNotfound"
@@ -23,8 +21,8 @@ import GetPermissions from "./api/AuthAPI"
 function App() 
 {
   const token = localStorage.getItem('token');
-let user = localStorage.getItem('userName');
-console.log(user);
+let users = localStorage.getItem('username');
+console.log(users);
   const [permissions, setPermissions] = useState(0);
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -48,7 +46,6 @@ console.log(user);
           <Route  path="/profile/:pseudo" element={<Profile permissions={permissions} />} />
           <Route  path="/logout" element={<Logout />} />
           <Route path="/createPost" element={<CreatePost permissions={permissions} />} />
-          <Route  path="/post/:id" element={<CreateOnePost permissions={permissions} />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

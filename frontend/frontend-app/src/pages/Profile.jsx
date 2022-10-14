@@ -6,15 +6,15 @@ import { updateProfile, deleteProfile } from "../api/UserAPI"
 function Profile() 
 {
   const [user, setList] = useState([]);
-  let profileUserName = localStorage.getItem('userName') ;
+  let profileUserName = localStorage.getItem('username') ;
   let profileEmail = localStorage.getItem('email');
-  let profileUserId = localStorage.getItem('userId');
+  let profileUserId = localStorage.getItem('user_id');
   
   //rendering pour aller chercher les infos des users dans le DB
   useEffect(() => {
     let data = {
-      userName: profileUserName,
-      userId: profileUserId,
+      username: profileUserName,
+      user_id: profileUserId,
       email: profileEmail
     }
       setList(data);
@@ -32,10 +32,10 @@ function Profile()
     .then((response) => 
     {
       console.log(response);
-      localStorage.setItem('userName', data.newUsername);
+      localStorage.setItem('username', data.newUsername);
       localStorage.setItem('email',data.newEmail);
       alert("Le profil a bien été modifié");
-      window.location.replace(`/profile/${data.newUsername}`);
+      window.location.replace(`/profiles/${data.newUsername}`);
     })
   }
 
@@ -49,7 +49,7 @@ function Profile()
       window.location.replace(`/login`);
     })
   }
-  if (user.userId){
+  if (user.user_id){
     return (
       <main>
         <h1>Gérer mon compte</h1>
@@ -59,7 +59,7 @@ function Profile()
           <section>
             <article>
               <h2>Informations du compte</h2>
-               <p>Pseudo: {user.userName}</p>
+               <p>Pseudo: {user.username}</p>
               <p>Mail: {user.email}</p>
             </article>
           </section>
@@ -67,7 +67,7 @@ function Profile()
             <form id="submitForm" onSubmit={submitForm}>
               <div>
                   <label htmlFor="userName">Pseudo: </label><br/>
-                  <input type="text" name="username" placeholder='userName'/>
+                  <input type="text" name="username" placeholder='username'/>
                 </div> 
                 <div>
                   <label htmlFor="email">email: </label><br/>

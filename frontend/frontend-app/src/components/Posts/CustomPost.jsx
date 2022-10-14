@@ -24,10 +24,10 @@ const PostImg = styled.img`
 
 
 function CustomPost({ value, permissions }){
-  const post = value;
-  let user = {
-    userName: localStorage.getItem("userName"),
-    isAdmin: localStorage.getItem("isAdmin")
+  const posts = value;
+  let users = {
+    userName: localStorage.getItem("username"),
+    isAdmin: localStorage.getItem("is_admin")
   }
   function DeletePost(item){
     deletePost(item.id)
@@ -42,25 +42,25 @@ return(
       <div className='postBody'>
         <div className="postHead">
           <p>
-            Publié par : {post.author + " "} 
-             le {post.createdAt.split("T")[0] + " à " + post.createdAt.split("T")[1].split(".")[0]}
+            Publié par : {posts.author + " "} 
+             le {posts.createdAt.split("T")[0] + " à " + posts.createdAt.split("T")[1].split(".")[0]}
           </p>
           </div>
           <PostImgContainer>
-            <PostImg src={post.attachement} alt="image du post" />
+            <PostImg src={posts.attachement} alt="image du post" />
           </PostImgContainer>
-          <div className="post">{post.content}
-          <h2>{post.title}</h2>
+          <div className="post">{posts.content}
+          <h2>{posts.title}</h2>
           {/*// Pour mettre des Commentaire(s) 
           <p className="postFeet"> 
           {post.commentNumber}  
           </p> */}
           </div>
           {// eslint-disable-next-line 
-            (post.author === user.userName|| user.isAdmin  == 1) && <span className="fontAwesomeSize" onClick={() =>
-              DeletePost(post)
+            (posts.author === users.userName|| users.isAdmin  == 1) && <span className="fontAwesomeSize" onClick={() =>
+              DeletePost(posts)
             }>
-              <LikeButton postId={post} />
+              <LikeButton postId={posts} />
               <FontAwesomeIcon icon={faTrash} />
             </span>
           }      
