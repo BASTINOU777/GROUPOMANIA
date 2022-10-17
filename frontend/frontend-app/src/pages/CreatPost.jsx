@@ -1,30 +1,27 @@
 import React from 'react'
-import { useState, useRef } from 'react';
-// import { useForm } from "react-hook-form";
+import { useState } from 'react'
 import { createPost } from "../api/PostsAPI"
 // import "../styles/Posts.css"
-function CreatePosts() 
-{
+
+function CreatePost() {
   const [selectedFile, setPostText] = useState(null);
 
   //au clic sur le bouton "poster", fonction de création de post et reload de la page
-  // function submitForm(event)
   function submitForm(event) 
   { 
     console.log("ok")
     event.preventDefault()
-    console.log(event.target);
     let filename = {
       title: event.target.titre.value,
       content: event.target.content.value,
-      author: localStorage.getItem("userName"),
+      author: localStorage.getItem("username"),
       attachement: selectedFile
     }
-    console.log(filename)
+    console.log("====>", filename)
     createPost(filename)
     .then((response) => 
     {
-      console.log(response);
+      console.log("===>>>>>>>>", response);
       alert("Le Post a bien été crée");
       window.location.replace("/");
     })
@@ -64,4 +61,4 @@ function CreatePosts()
 
 
 
-export default CreatePosts
+export default CreatePost

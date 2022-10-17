@@ -49,7 +49,7 @@ return(
           <PostImgContainer>
             <PostImg src={posts.attachement} alt="image du post" />
           </PostImgContainer>
-          <div className="post">{posts.content}
+          <div className="posts">{posts.content}
           <h2>{posts.title}</h2>
           {/*// Pour mettre des Commentaire(s) 
           <p className="postFeet"> 

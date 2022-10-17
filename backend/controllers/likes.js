@@ -1,4 +1,3 @@
-const { posts } = require("../app");
 const db = require("../models/index");
 const Like = db.likes;
 

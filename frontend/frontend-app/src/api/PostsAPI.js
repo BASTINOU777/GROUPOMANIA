@@ -23,9 +23,9 @@ export async function getAllPosts() {
   return jsonResponse;
 }
 
-export async function getOnePost(pageId) {
+export async function getOnePost(_id) {
   console.log(HEADERS_CONTENT);
-  const response = await fetch("http://localhost:3001/api/posts/" + pageId, {
+  const response = await fetch("http://localhost:3001/api/posts/" + _id, {
     method: "GET",
     headers: HEADERS_CONTENT,
   });
@@ -36,16 +36,16 @@ export async function getOnePost(pageId) {
   console.log("DEBUG json response one post: ", jsonResponse);
   return jsonResponse;
 }
-export async function createPost(data) {
-  return fetch("http://localhost:3001/api/posts/", {
+export async function createPost(_id) {
+  return fetch("http://localhost:3001/api/posts/" + _id, {
     method: "POST",
     headers: HEADERS_CONTENT,
-    body: JSON.stringify(data),
+    body: JSON.stringify(),
   }).then((response) => response.json());
 }
 
-export async function deletePost(id) {
-  return fetch("http://localhost:3001/api/posts/" + id, {
+export async function deletePost(user_id) {
+  return fetch("http://localhost:3001/api/posts/" + user_id, {
     method: "DELETE",
     headers: HEADERS_CONTENT,
   }).then((data) => data.json());
