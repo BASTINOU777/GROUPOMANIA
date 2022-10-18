@@ -36,12 +36,14 @@ export async function getOnePost(_id) {
   console.log("DEBUG json response one post: ", jsonResponse);
   return jsonResponse;
 }
-export async function createPost(_id) {
-  return fetch("http://localhost:3001/api/posts/" + _id, {
+export async function createPost(filename) {
+  const response = await fetch(`http://localhost:3001/api/posts/`, {
     method: "POST",
     headers: HEADERS_CONTENT,
-    body: JSON.stringify(),
-  }).then((response) => response.json());
+    body: JSON.stringify(filename),
+  })
+    .then((response) => response.json())
+    .then((response2) => console.log(response2));
 }
 
 export async function deletePost(user_id) {
