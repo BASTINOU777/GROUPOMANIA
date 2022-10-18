@@ -44,7 +44,7 @@ function Login()
       */
 
         
-        window.location.replace(`/profiles/${response.username}`);
+        window.location.replace(`/profile/${response.username}`);
         // console.log(response.userInfos)
       }
       else

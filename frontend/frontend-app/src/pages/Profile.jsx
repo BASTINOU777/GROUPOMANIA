@@ -35,7 +35,7 @@ function Profile()
       localStorage.setItem('username', data.newUsername);
       localStorage.setItem('email',data.newEmail);
       alert("Le profil a bien été modifié");
-      window.location.replace(`/profiles/${data.newUsername}`);
+      window.location.replace(`/profile/${data.newUsername}`);
     })
   }
 
@@ -66,7 +66,7 @@ function Profile()
           <h2>Modifiez votre compte</h2>
             <form id="submitForm" onSubmit={submitForm}>
               <div>
-                  <label htmlFor="userName">Pseudo: </label><br/>
+                  <label htmlFor="username">Pseudo: </label><br/>
                   <input type="text" name="username" placeholder='username'/>
                 </div> 
                 <div>

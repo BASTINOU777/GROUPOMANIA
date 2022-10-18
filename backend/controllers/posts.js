@@ -1,28 +1,8 @@
-// const posts = require("../models/posts");
+const posts = require("../models/posts");
 const fs = require("fs");
-const db = require("../models");
-const posts = db.posts;
+// const db = require("../models");
+// const posts = db.posts;
 
-// exports.createPost = async (req, res) => {
-//   const { id, author, title, content } = req.body;
-//   const attachement = req.file
-//     ? `${req.protocol}://${req.get("host")}/pictures/${req.file.filename}`
-//     : "";
-//   await posts
-//     .create({
-//       id: id,
-//       author: author,
-//       title: title,
-//       content: content,
-//       attachement: attachement,
-//     })
-//     .then(() => {
-//       res.status(201).json({ message: "Nouveau Post créé!" });
-//     })
-//     .catch((error) => {
-//       res.status(400).json({ error });
-//     });
-// };
 exports.createPost = async (req, res) => {
   const { id, author, title, content } = req.body;
   const attachement = req.file
@@ -51,7 +31,7 @@ exports.createPost = async (req, res) => {
 
 exports.getAllPosts = async (req, res) => {
   console.log("test get all posts");
-  //affichage des all posts du plus récent au plus ancien et les met à jour
+  //post all posts du plus récent au plus ancien et les met à jour
   const allPosts = await posts.find({}).sort({ updateAt: "desc" }).exec();
   console.log("===>>> db posts", posts);
   res.status(200).json(allPosts);

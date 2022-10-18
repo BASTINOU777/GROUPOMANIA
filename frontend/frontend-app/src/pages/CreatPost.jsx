@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { createPost } from "../api/PostsAPI"
-// import "../styles/Posts.css"
+import "../styles/Posts.css"
 
 function CreatePost() {
   const [selectedFile, setPostText] = useState(null);

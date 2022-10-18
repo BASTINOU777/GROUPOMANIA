@@ -6,14 +6,15 @@ import { BrowserRouter, Routes, Route, } from "react-router-dom"
 import ConnectToBanner from "./components/Banner/ConnectToBanner"
 import DisconnectToBanner from "./components/Banner/DisconnectToBanner"
 
-
 import SignUp from "./pages/SignUp"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
-import CreatePost from './pages/CreatPost'
-import Logout from './pages/LogOut'
+import CreatePost from "./pages/CreatPost"
+import DisplayOnePost from "./pages/DisplayOnePost"
+import Logout from "./pages/LogOut"
 import PageNotFound from "./pages/PageNotfound"
+
 import GetPermissions from "./api/AuthAPI"
 
 
@@ -42,10 +43,11 @@ console.log(users);
         <ConnectToBanner />
 
         <Routes>
-          <Route  path="/" element={<Home permissions={permissions}/>} />
+          <Route  path="/" element={<Home permissions={permissions} />} />
           <Route  path="/profile/:pseudo" element={<Profile permissions={permissions} />} />
           <Route  path="/logout" element={<Logout />} />
           <Route path="/createPost" element={<CreatePost permissions={permissions} />} />
+          <Route path="/posts/:id" element={<DisplayOnePost permissions={permissions} />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

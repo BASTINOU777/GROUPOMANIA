@@ -18,7 +18,7 @@ export async function updateProfile(users, data) {
 }
 
 export async function getProfile(users) {
-  return fetch(`http://localhost:3001/api/auth/${users}`, {
+  return fetch(`http://localhost:3001/api/profile/${users}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
