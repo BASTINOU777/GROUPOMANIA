@@ -21,7 +21,6 @@ function CreatePost() {
     createPost(filename)
     .then((response) => 
     {
-      console.log("===>>>>>>>>", response);
       alert("Le Post a bien été crée");
       window.location.replace("/");
     })
