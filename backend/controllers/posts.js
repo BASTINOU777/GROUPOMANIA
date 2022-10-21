@@ -1,9 +1,10 @@
-const posts = require("../models/posts");
+const posts = require("../models").posts;
 const fs = require("fs");
 // const db = require("../models");
+const { users } = require("../models");
 // const posts = db.posts;
 
-exports.createPost = async (req, res) => {
+exports.createPost = async (req, res, next) => {
   const { id, author, title, content } = req.body;
   const attachement = req.file
     ? `${req.protocol}://${req.get("host")}/pictures/${req.file.filename}`
@@ -29,13 +30,43 @@ exports.createPost = async (req, res) => {
   }
 };
 
-exports.getAllPosts = async (req, res) => {
-  console.log("test get all posts");
-  //post all posts du plus récent au plus ancien et les met à jour
-  const allPosts = await posts.find({}).sort({ updateAt: "desc" }).exec();
-  console.log("===>>> db posts", posts);
-  res.status(200).json(allPosts);
+exports.getAllPosts = (req, res, next) => {
+  // console.log("=>", posts);
+  posts
+    .findAll({
+      raw: true,
+      include: {
+        model: users,
+      },
+      order: [["userId", "DESC"]],
+    })
+    .then((postCreated) => {
+      console.log("=> allposts ", postCreated);
+      res.status(200).json(postCreated);
+    })
+    .catch((error) => {
+      res.status(400).json({
+        error: error,
+      });
+    });
 };
+
+// exports.getAllPosts = async (req, res) => {
+//   await db.posts.findAll({
+//     //look si postId return null
+//     order: [["id", "DESC"]],
+//   });
+//   console
+//     .log("=>", db.posts)
+//     .then((allPosts) => {
+//       res.status(200).json(allPosts);
+//     })
+//     .catch((error) => {
+//       res.status(400).json({
+//         error: error,
+//       });
+//     });
+// };
 
 exports.getOnePost = async (req, res) => {
   const post = await posts.findOne({
