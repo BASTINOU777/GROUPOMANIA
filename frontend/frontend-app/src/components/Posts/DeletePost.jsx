@@ -5,7 +5,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 function DeletePost({value}){
     function deleteComment(item)
     {
-deletePosts (item.postId)
+deletePosts (item.userId)
 .then(()=>{
     window.location.reload();
     window.location.replace(`/`);

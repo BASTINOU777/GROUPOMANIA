@@ -1,6 +1,6 @@
 const HEADERS_CONTENT = new Headers({
-  "Content-Type": "application/json",
-  "User-ID": localStorage.getItem("user_id"),
+  // "Content-Type": "application/json",
+  "User-ID": localStorage.getItem("userId"),
   Authorization: `Bearer ${localStorage.getItem("token")}`,
 });
 
@@ -36,18 +36,19 @@ export async function getOnePost(_id) {
   console.log("DEBUG json response one post: ", jsonResponse);
   return jsonResponse;
 }
-export async function createPost(filename) {
+export async function createPost(FormData) {
+  console.log("form data", { FormData });
   const response = await fetch(`http://localhost:3001/api/posts/`, {
     method: "POST",
     headers: HEADERS_CONTENT,
-    body: JSON.stringify(filename),
+    body: JSON.stringify(FormData),
   })
-    .then((response) => response.json())
+    .then((response) => response.json(FormData))
     .then((response2) => console.log(response2));
 }
 
-export async function deletePost(user_id) {
-  return fetch("http://localhost:3001/api/posts/" + user_id, {
+export async function deletePost(userId) {
+  return fetch(`http://localhost:3001/api/posts/${userId}`, {
     method: "DELETE",
     headers: HEADERS_CONTENT,
   }).then((data) => data.json());

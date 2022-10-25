@@ -23,10 +23,7 @@ db.users = require("./users")(sequelize, Sequelize);
 db.posts = require("./posts")(sequelize, Sequelize);
 db.likes = require("./likes")(sequelize, Sequelize);
 
-// db.posts.belongsTo(db.posts, {
-//   onDelete: "CASCADE",
-// });
-// db.posts.hasMany(db.posts);
+db.posts.hasMany(db.posts);
 db.users.hasMany(db.posts);
 db.posts.belongsTo(db.users, {
   foreignKey: {

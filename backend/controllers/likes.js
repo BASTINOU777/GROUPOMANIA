@@ -1,9 +1,10 @@
 const db = require("../models/index");
-const Like = db.likes;
+const likes = db.likes;
 
 exports.likesPosts = (req, res, next) => {
   console.log("test get all posts");
-  Like.findAll()
+  likes
+    .findAll()
     .then((likes) => {
       console.log("je suis dans likes controller", likes);
       res.status(200).json(likes);
@@ -16,7 +17,8 @@ exports.likesPosts = (req, res, next) => {
 };
 
 exports.getOneLike = (req, res, next) => {
-  Like.findByPk(req.params.id)
+  likes
+    .findByPk(req.params.id)
     .then((oneLike) => {
       res.status(200).json(oneLike);
     })

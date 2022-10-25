@@ -30,12 +30,12 @@ function CustomPost({ value, permissions }){
     isAdmin: localStorage.getItem("is_admin")
   }
   function DeletePost(item){
-    deletePost(item.id)
+    deletePost(item.userId)
     .then(()=>{
         window.location.reload();
         window.location.replace(`/`);
     })
-    console.log("========> dans le deletepost", item.id)
+    console.log("========> dans le deletepost", item.userId)
   }
 return(
   <article className='postTemplate' >
@@ -51,16 +51,12 @@ return(
           </PostImgContainer>
           <div className="posts">{posts.content}
           <h2>{posts.title}</h2>
-          {/*// Pour mettre des Commentaire(s) 
-          <p className="postFeet"> 
-          {post.commentNumber}  
-          </p> */}
           </div>
-          {// eslint-disable-next-line 
+          {
             (posts.author === users.userName|| users.isAdmin  == 1) && <span className="fontAwesomeSize" onClick={() =>
               DeletePost(posts)
             }>
-              <LikeButton postId={posts} />
+              <LikeButton userId={posts} />
               <FontAwesomeIcon icon={faTrash} />
             </span>
           }      

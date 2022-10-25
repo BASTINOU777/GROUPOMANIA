@@ -5,6 +5,14 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
+    userId: {
+      allowNull: false,
+      type: Sequelize.INTEGER,
+      references: {
+        model: "users",
+        key: "id",
+      },
+    },
     likes: {
       type: Sequelize.INTEGER,
       defaultValue: 0,

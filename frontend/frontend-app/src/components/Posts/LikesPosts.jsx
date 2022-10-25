@@ -1,21 +1,20 @@
 import { useState, useEffect } from 'react';
 import React from 'react'
-// import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-  import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
   
 // //state
-const Like = ({ post, userId }) => {
-  const id = post.id;
+const Like = ({ posts, userId }) => {
+  const id = userId;
     const [postLike, setPostLike] = useState()
     const [userLiked, setUserLiked] = useState()
 //vérifie si l'user à like le post
   const checkLikes = (postLikes, userId) => {
     let isLiked = false;
     // je boucle les likes
-    postLikes.forEach((like) => {
+    postLikes.forEach((likes) => {
         //si l'user qui like est égale à l'userId alors je le met dans le [] isLiked
-        if (like.author === userId) {
+        if (likes.author === userId) {
             isLiked = true;
         }        
     });
@@ -25,14 +24,14 @@ const Like = ({ post, userId }) => {
 useEffect(() =>{
   const getLikes = async () => {
     try {
-      const res = await fetch (`http://localhost:3001/api/post/${post.id}/like`,)
+      const res = await fetch (`http://localhost:3001/api/posts/${userId}/likes`,)
       const data = await res.json();
       if (!res.ok) return 
-      const isLiked = checkLikes(data.like, userId);
+      const isLiked = checkLikes(data.likes, userId);
       console.log( "===>", isLiked );
-      console.log("======>>>>>>>", id);
+      console.log("======>>>>>>>", userId);
       setUserLiked(isLiked);
-      setPostLike(data.like.length);
+      setPostLike(data.likes.length);
       return data
     } catch (error){
       return console.log(error);
@@ -58,7 +57,7 @@ useEffect(() =>{
 }
 
 try {
-  const res = await fetch (`http://localhost:3001/api/post/like/${id}`, apiLike);
+  const res = await fetch (`http://localhost:3001/api/posts/likes/${userId}`, apiLike);
   const data = await res.json();
   if (!res.ok)return;
   setUserLiked(!userLiked)
