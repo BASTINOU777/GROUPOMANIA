@@ -4,27 +4,52 @@ const fs = require("fs");
 const { users } = require("../models");
 // const posts = db.posts;
 
+// exports.createPost = async (req, res, next) => {
+//   console.log(req.body);
+//   const { userId, author, title, content } = req.body;
+//   const attachement = req.file
+//     ? `${req.protocol}://${req.get("host")}/pictures/${req.file.filename}`
+//     : "";
+
+//   try {
+//     const postCreated = await posts.create({
+//       userId: userId,
+//       author: author,
+//       title: title,
+//       content: content,
+//       attachement: attachement,
+//     });
+
+//     // If the post is not created, we throw an error
+//     if (!postCreated) throw new Error("Post not created");
+
+//     // Else we return 201 status code and message
+//     res.status(201).json("Post created");
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ error: error.message });
+//   }
+// };
 exports.createPost = async (req, res, next) => {
   console.log(req.body);
-  const { userId, author, title, content } = req.body;
-  const attachement = req.file
-    ? `${req.protocol}://${req.get("host")}/pictures/${req.file.filename}`
-    : "";
 
   try {
-    const postCreated = await posts.create({
-      userId: userId,
-      author: author,
-      title: title,
-      content: content,
-      attachement: attachement,
-    });
+      const post = req.body;
+      if(req.file){
+          await posts.create({
+              attachement: `${req.protocol}://${req.get("host")}/pictures/${req.file.filename}`,
+              ...post,
+          })
+          res.status(201).json("Post created");
 
-    // If the post is not created, we throw an error
-    if (!postCreated) throw new Error("Post not created");
+      } else {
+          await posts.create({
+              ...post,
+          })
+          res.status(201).json("Post created");
 
-    // Else we return 201 status code and message
-    res.status(201).json("Post created");
+      }
+
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });

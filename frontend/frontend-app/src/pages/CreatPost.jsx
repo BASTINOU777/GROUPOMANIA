@@ -5,7 +5,7 @@ import { createPost } from "../api/PostsAPI"
 import "../styles/Posts.css"
 
 function CreatePost() {
-  const { handleSubmit } = useForm();
+  // const { handleSubmit } = useForm();
   const [content, setContent] = useState('');
   const [userId, setUserId] = useState('');
   const [title, setTitle] = useState('');
@@ -14,24 +14,26 @@ function CreatePost() {
   
 
   //au clic sur le bouton "poster", fonction de création de post et reload de la page
-  const oneSubmit = (data, e) => { 
-    console.log("====>>>>>>>>>> data, event",data, e);
+  const oneSubmit = (e) => { 
+    // console.log("====>>>>>>>>>> data, event",data, e);
     e.preventDefault();
 
     // preventDefault();
-    const formData = new FormData();
+    const formData = new FormData(e.target);
     formData.append(
       "attachement",
       e.target.attachement.files[0],
       e.target.attachement.files[0].name
     );
-    formData.append("author", author);
+    formData.append("author", "test");
     formData.append("content", content);
     formData.append("title", title);
     formData.append("userId",userId);
+    const formValues = JSON.stringify(Object.fromEntries(formData));
+    console.log(formValues);
 
-    console.log("====>", FormData)
-    createPost(FormData)
+    console.log(formData);
+    createPost(formData)
     .then((response) => 
     {
       alert("Le Post a bien été crée");
@@ -39,15 +41,13 @@ function CreatePost() {
     })
   };
 
-    const handleFileChange = (e) => {
-      const picture = {
-        preview: URL.createObjectURL(e.target.files[0]),
-      //   data= {data e.target.attachement[0],
-      // };
-      setPictures(picture);
-    };
-    
-   
+    // const handleFileChange = (e) => {
+    //   const picture = {
+    //     preview: URL.createObjectURL(e.target.files[0]),
+    //     data:e.target.attachement.files[0]}
+    //   setPictures(picture);
+    //  }
+
    
    
     return (
@@ -56,7 +56,7 @@ function CreatePost() {
         <section>
           <article>
           <h2>Créer une publication</h2>
-          <form onSubmit={handleSubmit(oneSubmit)}>
+          <form onSubmit={oneSubmit}>
               <div>
                   <label htmlFor="Titre">Titre: </label><br/>
                   <input type="text" name="titre" placeholder='Titre' value={title} onChange={(e) => setTitle(e.target.value)}/>
@@ -70,8 +70,8 @@ function CreatePost() {
           type="file"
           id="attachement"
           name="attachement"
-          onChange={handleFileChange}
-          accept=".gif, .jpeg, .jpg"
+          // onChange={handleFileChange}
+          accept=".gif, .jpeg, .png, .webp"
           ></input>
 				<button> Publier</button>
               </form>

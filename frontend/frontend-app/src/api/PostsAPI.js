@@ -36,14 +36,14 @@ export async function getOnePost(_id) {
   console.log("DEBUG json response one post: ", jsonResponse);
   return jsonResponse;
 }
-export async function createPost(FormData) {
-  console.log("form data", { FormData });
+export async function createPost(formData) {
+  console.log("form data", { formData });
   const response = await fetch(`http://localhost:3001/api/posts/`, {
     method: "POST",
     headers: HEADERS_CONTENT,
-    body: JSON.stringify(FormData),
+    body: JSON.stringify(formData),
   })
-    .then((response) => response.json(FormData))
+    .then((response) => response.json(formData))
     .then((response2) => console.log(response2));
 }
 

@@ -13,13 +13,13 @@ module.exports = (sequelize, Sequelize) => {
         key: "id",
       },
     },
-    likes: {
+    postId: {
+      allowNull: false,
       type: Sequelize.INTEGER,
-      defaultValue: 0,
-    },
-    users_liked: {
-      type: Sequelize.INTEGER,
-      defaultValue: 0,
+      references: {
+        model: "users",
+        key: "id",
+      },
     },
   });
   return likes;
