@@ -27,4 +27,4 @@ const storage = multer.diskStorage({
   },
 });
 //appel de la méthode multer et on lui passe storage
-module.exports = multer({ storage: storage }).single("pictures");
+module.exports = multer({ storage: storage }).single("attachement");
