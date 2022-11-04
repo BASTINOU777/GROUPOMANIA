@@ -29,6 +29,7 @@ function CustomPost({ value, permissions }){
     userName: localStorage.getItem("username"),
     isAdmin: localStorage.getItem("is_admin")
   }
+  console.log("============<<<<<< post.attachement", posts.attachement);
   function DeletePost(item){
     deletePost(item.userId)
     .then(()=>{
@@ -36,6 +37,7 @@ function CustomPost({ value, permissions }){
         window.location.replace(`/`);
     })
     console.log("========> dans le deletepost", item.userId)
+    
   }
 return(
   <article className='postTemplate' >
@@ -47,7 +49,7 @@ return(
           </p>
           </div>
           <PostImgContainer>
-            <PostImg src={posts.attachement} alt="image du post" />
+            <img src={posts.attachement} alt="image du post" />
           </PostImgContainer>
           <div className="posts">{posts.content}
           <h2>{posts.title}</h2>

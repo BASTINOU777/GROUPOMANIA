@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
   //fonction "destination"qui prend 3 arguments (requète, file et un callback)
   destination: (req, file, callback) => {
     //appel du callback avec le dossier "images"
-    callback(null, "pictures");
+    callback(null, 'pictures');
   },
   //fonction "filename" qui prends 3 arguments
   filename: (req, file, callback) => {

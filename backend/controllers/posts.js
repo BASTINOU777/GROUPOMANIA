@@ -31,28 +31,31 @@ const { users } = require("../models");
 //   }
 // };
 exports.createPost = async (req, res, next) => {
-  console.log(req.body);
+  const postToCreate = {
+    content: req.body.content,
+    author: req.body.author,
+    title: req.body.title,
+    userId: req.body.userId,
+  };
+  let dataToPush;
+
+  if (req.file) {
+    dataToPush = {
+      attachement: `${req.protocol}://${req.get("host")}/pictures/${
+        req.file.filename
+      }`,
+      ...postToCreate,
+    };
+  } else {
+    dataToPush = postToCreate;
+  }
 
   try {
-      const post = req.body;
-      if(req.file){
-          await posts.create({
-              attachement: `${req.protocol}://${req.get("host")}/pictures/${req.file.filename}`,
-              ...post,
-          })
-          res.status(201).json("Post created");
-
-      } else {
-          await posts.create({
-              ...post,
-          })
-          res.status(201).json("Post created");
-
-      }
-
+    await posts.create(dataToPush);
+    return res.status(201).json("Post created");
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -79,7 +82,7 @@ exports.getAllPosts = (req, res, next) => {
 
 exports.getOnePost = async (req, res) => {
   const post = await posts.findOne({
-    id: req.params.user_id,
+    id: req.params.userId,
   });
   res.status(200).json(post);
 };
@@ -94,17 +97,17 @@ exports.modifyPost = async (req, res) => {
     content,
     attachement: attachement,
   };
-  delete req.body.user_id;
+  delete req.body.userId;
   if (req.file !== undefined) {
     posts
-      .findOne({ id: req.params.user_id })
+      .findOne({ id: req.params.userId })
       .then((post) => {
         const filename = post.attachement.split("pictures/")[1];
         fs.unlink(`pictures/${filename}`, () => {
           posts
             .updateOne(
-              { id: req.params.user_id },
-              { ...postObject, id: req.params.user_id }
+              { id: req.params.userId },
+              { ...postObject, id: req.params.userId }
             )
             .then(() => res.status(200).json("Publication mise à jour!"))
             .catch((error) => res.status(401).json({ error }));
@@ -113,7 +116,7 @@ exports.modifyPost = async (req, res) => {
       .catch((error) => res.status(404).json({ error }));
   } else {
     posts
-      .updateOne({ id: req.params.user_id }, { content: content })
+      .updateOne({ id: req.params.userId }, { content: content })
       .then(() => res.status(200).json("Publication mise à jour!"))
       .catch((error) => res.status(401).json({ error }));
   }
@@ -121,16 +124,16 @@ exports.modifyPost = async (req, res) => {
 
 exports.deletePost = async (req, res) => {
   await posts
-    .findOne({ id: req.params.user_id })
+    .findOne({ id: req.params.userId })
     .then((post) => {
       if (post.attachement) {
         const filename = post.attachement.split("/pictures/")[1];
         fs.unlink(`pictures/${filename}`, () => {
-          post.deleteOne({ id: req.params.user_id });
+          post.deleteOne({ id: req.params.userId });
         });
         res.status(200).json({ message: "Publication supprimée !" });
       } else {
-        post.deleteOne({ id: req.params.user_id });
+        post.deleteOne({ id: req.params.userId });
         res.status(200).json({ message: "Publication supprimée !" });
       }
     })

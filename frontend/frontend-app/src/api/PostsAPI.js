@@ -36,16 +36,16 @@ export async function getOnePost(_id) {
   console.log("DEBUG json response one post: ", jsonResponse);
   return jsonResponse;
 }
-export async function createPost(formData) {
-  console.log("form data", { formData });
-  const response = await fetch(`http://localhost:3001/api/posts/`, {
-    method: "POST",
-    headers: HEADERS_CONTENT,
-    body: JSON.stringify(formData),
-  })
-    .then((response) => response.json(formData))
-    .then((response2) => console.log(response2));
-}
+// export async function createPost(formData) {
+//   console.log("form data", { formData });
+//   const response = await fetch(`http://localhost:3001/api/posts/`, {
+//     method: "POST",
+//     headers: HEADERS_CONTENT,
+//     body: JSON.stringify(formData),
+//   })
+//     .then((response) => response.json(formData))
+//     .then((response2) => console.log(response2));
+// }
 
 export async function deletePost(userId) {
   return fetch(`http://localhost:3001/api/posts/${userId}`, {

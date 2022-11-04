@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
     console.log("token" + token);
     // Décodage du token
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-    console.log(decodedToken);
+    console.log('decodedToken =>', decodedToken);
     // Récupération du userId encodé dans le token
     const userId = decodedToken.user_id;
     console.log("c'est l'userId" + userId);
@@ -18,6 +18,6 @@ module.exports = (req, res, next) => {
     };
     next();
   } catch {
-    res.status(403).json({ error: "Oups tu n'est pas connecté!" });
+    return res.status(403).json({ error: "Oups tu n'est pas connecté!" });
   }
 };
